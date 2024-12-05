@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <form>
+                <form method="POST">
                 <div  style="font-size: 20px;" class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("シミュレーション") }}
 
@@ -31,7 +31,7 @@
                         id="bihin" 
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="月収を入力してください"
-                        step="1"
+                        step="0.1"
                         min="0"
                     >
 
@@ -46,6 +46,7 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="一日あたりの時間"
                                 step="0.5"
+                                max="24"
                                 min="0"
                             >
                         </div>
@@ -58,6 +59,7 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="週何日働くか"
                                 step="1"
+                                max="7"
                                 min="1"
                             >
                         </div>
