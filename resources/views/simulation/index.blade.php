@@ -23,12 +23,64 @@
                         </label>
                         <span id="toggle-text" class="ml-3 text-gray-900 dark:text-gray-100">フルタイム</span>
                     </div>
+
+                    <!-- 月収 or 時給 入力フィールド -->
+                    <input 
+                        type="number" 
+                        name="bihin" 
+                        id="bihin" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="月収を入力してください"
+                        step="1"
+                        min="0"
+                    >
+
+                    <!-- パートタイムの一日あたりの時間と週何日かを入力 -->
+                    <div id="part-time-fields" class="hidden">
+                        <div class="mt-4">
+                            <label for="work-hours" class="block text-gray-700 dark:text-gray-300">一日あたりの時間</label>
+                            <input 
+                                type="number" 
+                                name="work-hours" 
+                                id="work-hours" 
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="一日あたりの時間"
+                                step="0.5"
+                                min="0"
+                            >
+                        </div>
+                        <div class="mt-4">
+                            <label for="work-days" class="block text-gray-700 dark:text-gray-300">週何日働くか</label>
+                            <input 
+                                type="number" 
+                                name="work-days" 
+                                id="work-days" 
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="週何日働くか"
+                                step="1"
+                                min="1"
+                            >
+                        </div>
+                    </div>
+
                     <script>
                         function toggleText(toggle) {
                             const text = toggle.checked ? 'パートタイム' : 'フルタイム';
+                            const placeholder = toggle.checked ? '時給を入力してください' : '月収を入力してください';
+
                             document.getElementById('toggle-text').innerText = text;
+                            document.getElementById('bihin').placeholder = placeholder;
+
+                            // パートタイムの場合は追加フィールドを表示
+                            const partTimeFields = document.getElementById('part-time-fields');
+                            if (toggle.checked) {
+                                partTimeFields.classList.remove('hidden');
+                            } else {
+                                partTimeFields.classList.add('hidden');
+                            }
                         }
                     </script>
+
                 </div>
                 <div  style="font-size: 20px;" class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("ツール代") }}
@@ -37,6 +89,16 @@
                 </div>
                 <div  style="font-size: 20px;" class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("備品代") }}
+                    <input 
+                        type="number" 
+                        name="bihin" 
+                        id="bihin" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="費用を入力してください"
+                        step="1"
+                        min="0"
+                    >
+
                     
 
                 </div>
