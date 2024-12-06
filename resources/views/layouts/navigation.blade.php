@@ -22,7 +22,7 @@
                         {{ __('ツール一覧') }}
                     </x-nav-link>
                     <x-nav-link :href="route('tools.create')" :active="request()->routeIs('tools.create')">
-                        {{ __('ツール一覧') }}
+                        {{ __('ツールの追加') }}
                     </x-nav-link>
 
                 </div>

@@ -22,8 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/simulation-index', [SimulationController::class, 'index'])->name('simulation.index');
 
     Route::resource('tools', ToolsController::class);
-    Route::get('/tools', [ToolsController::class, 'index'])->name('tools.index');
+    Route::get('/tools-index', [ToolsController::class, 'index'])->name('tools.index');
     Route::post('/tools', [ToolsController::class, 'store'])->name('tools.store');
+    Route::get('/tools-store', [ToolsController::class, 'create'])->name('tools.create');
+    Route::get('/tools-search', [ToolsController::class, 'search'])->name('tools.search');
 });
 
 require __DIR__ . '/auth.php';
