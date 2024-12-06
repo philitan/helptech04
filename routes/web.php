@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SimulationController;
+use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,7 +20,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('simulation', SimulationController::class);
     Route::get('/simulation-index', [SimulationController::class, 'index'])->name('simulation.index');
-    Route::get('/simulation-tools', [SimulationController::class, 'tools'])->name('simulation.tools');
+
+    Route::resource('tools', ToolsController::class);
+    Route::get('/tools', [ToolsController::class, 'index'])->name('tools.index');
+    Route::post('/tools', [ToolsController::class, 'store'])->name('tools.store');
 });
 
 require __DIR__ . '/auth.php';
