@@ -39,6 +39,20 @@ class ToolsController extends Controller
         return view('tools.create');
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        if (!empty($keyword)) {
+            $tools = Tools::where('name', 'LIKE', "%{$keyword}%")->paginate(10);
+        } else {
+            $tools = Tools::paginate(10);
+        }
+
+        return view('tools.index', compact('tools'));
+    }
+
+
 
 
     public function show(Simulation $simulation)
