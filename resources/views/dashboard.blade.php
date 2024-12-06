@@ -11,6 +11,18 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
+            <!-- 以下、計算のテスト用 -->
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <?php
+                    use App\Models\Insurance;
+
+                    $kihon = 100000;
+                    $insurance = Insurance::where('salary', '<=', "$kihon")->get();
+                    $insurance2 = $insurance::first();
+                    echo $kihon;
+                    ?>
+                </div>
+            <!-- テスト用ここまで -->
             </div>
         </div>
     </div>
