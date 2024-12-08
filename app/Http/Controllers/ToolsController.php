@@ -55,32 +55,37 @@ class ToolsController extends Controller
 
 
 
-    public function show(Simulation $simulation)
-    {
-        //
-    }
+    public function show(Simulation $simulation) {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Simulation $simulation)
+    public function edit(Tools $tool)
     {
-        //
+        return view('tools.edit', compact('tool')); //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Simulation $simulation)
+    public function update(Request $request, Tools $tool)
     {
-        //
+        $request->validate([
+            'tool_name' => 'required|max:255',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $tool->update($request->only(['tool_name', 'price']));
+
+        return redirect()->route('tools.index', $tool);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Simulation $simulation)
+    public function destroy(Tools $tool)
     {
-        //
+        $tool->delete(); //
+        return redirect()->route('tools.index');
     }
 }

@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form method="POST" action="{{ route('tools.store') }}" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <!-- ツール名 -->
                         <div class="mb-4">
                             <label for="tool_name" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">ツール名</label>
@@ -18,7 +19,7 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="ツール名を入力">
                             @error('tool_name')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                            <span class="text-red-500 text-xs italic">{{ $tools->name }}</span>
                             @enderror
                         </div>
 
@@ -29,7 +30,7 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="値段を入力">
                             @error('price')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                            <span class="text-red-500 text-xs italic">{{ $tools->price }}</span>
                             @enderror
                         </div>
 
