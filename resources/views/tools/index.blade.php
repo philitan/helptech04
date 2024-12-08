@@ -31,6 +31,17 @@
                     <p class="text-gray-800 dark:text-gray-300 text-lg font-bold">
                         ¥{{ intval($tool->price) }}
                     </p>
+                    <div class="flex">
+                        <!-- 編集リンク -->
+                        <a href="{{ route('tools.edit', $tool) }}" class="text-gray-500 hover:text-black-700 mr-2">編集する</a>
+
+                        <!-- 削除フォーム -->
+                        <form action="{{ route('tools.destroy', $tool) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-gray-500 hover:text-black-700">削除する</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
