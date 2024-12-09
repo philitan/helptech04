@@ -71,11 +71,11 @@ class ToolsController extends Controller
     public function update(Request $request, Tools $tool)
     {
         $request->validate([
-            'tool_name' => 'required|max:255',
+
             'price' => 'required|numeric|min:0',
         ]);
 
-        $tool->update($request->only(['tool_name', 'price']));
+        $tool->update($request->only('price'));
 
         return redirect()->route('tools.index', $tool);
     }
@@ -83,9 +83,11 @@ class ToolsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(Tools $tool)
     {
-        $tool->delete(); //
+        $tool->delete();
+
         return redirect()->route('tools.index');
     }
 }
