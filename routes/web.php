@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SimulationController;
+use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('simulation', SimulationController::class);
     Route::get('/simulation-index', [SimulationController::class, 'index'])->name('simulation.index');
     Route::get('/simulation-tools', [SimulationController::class, 'tools'])->name('simulation.tools');
+    Route::get('/result-index',[ResultController::class,'index'])->name('result.index');
 });
 
 require __DIR__ . '/auth.php';
