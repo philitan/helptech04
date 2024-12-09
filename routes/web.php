@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SimulationController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,6 +24,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/simulation-index', [SimulationController::class, 'index'])->name('simulation.index');
     Route::get('/simulation-tools', [SimulationController::class, 'tools'])->name('simulation.tools');
     Route::get('/result-index',[ResultController::class,'index'])->name('result.index');
+
+
+    Route::resource('tools', ToolsController::class);
+    Route::get('/tools-index', [ToolsController::class, 'index'])->name('tools.index');
+    Route::post('/tools', [ToolsController::class, 'store'])->name('tools.store');
+    Route::get('/tools-store', [ToolsController::class, 'create'])->name('tools.create');
+    Route::get('/tools-search', [ToolsController::class, 'search'])->name('tools.search');
+    Route::delete('/tools/{tool}', [ToolsController::class, 'destroy'])->name('tools.destroy');
 });
 
 require __DIR__ . '/auth.php';
