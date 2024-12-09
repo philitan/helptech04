@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/tools', [ToolsController::class, 'store'])->name('tools.store');
     Route::get('/tools-store', [ToolsController::class, 'create'])->name('tools.create');
     Route::get('/tools-search', [ToolsController::class, 'search'])->name('tools.search');
-    Route::delete('/tools-destroy', [ToolsController::class, 'destroy'])->name('tools.destroy');
+    Route::delete('/tools/{tool}', [ToolsController::class, 'destroy'])->name('tools.destroy');
 });
 
 require __DIR__ . '/auth.php';
