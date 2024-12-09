@@ -22,6 +22,7 @@
                                 placeholder="備品の代金を入力してください"
                                 step="1"
                                 min="0"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -34,6 +35,7 @@
                                 placeholder="ツールの代金を入力してください"
                                 step="1"
                                 min="0"
+                                required
                             >
                         </div>
                     </div>
@@ -146,16 +148,24 @@
     function toggleFields(toggle) {
         const isPartTime = toggle.checked;
         const toggleText = document.getElementById('toggle-text');
-        const fulltimeFields = document.getElementById('fulltime-fields');
-        const parttimeFields = document.getElementById('parttime-fields');
+        const fulltimeFields = document.querySelectorAll('#fulltime-fields input');
+        const parttimeFields = document.querySelectorAll('#parttime-fields input');
 
         toggleText.innerText = isPartTime ? 'パートタイム' : 'フルタイム';
+
+        // パートタイムの場合
         if (isPartTime) {
-            fulltimeFields.classList.add('hidden');
-            parttimeFields.classList.remove('hidden');
-        } else {
-            fulltimeFields.classList.remove('hidden');
-            parttimeFields.classList.add('hidden');
+            fulltimeFields.forEach(field => field.required = false);
+            parttimeFields.forEach(field => field.required = true);
+            document.getElementById('parttime-fields').classList.remove('hidden');
+            document.getElementById('fulltime-fields').classList.add('hidden');
+        } 
+        // フルタイムの場合
+        else {
+            fulltimeFields.forEach(field => field.required = true);
+            parttimeFields.forEach(field => field.required = false);
+            document.getElementById('parttime-fields').classList.add('hidden');
+            document.getElementById('fulltime-fields').classList.remove('hidden');
         }
     }
 </script>
