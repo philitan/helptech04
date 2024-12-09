@@ -13,26 +13,26 @@
                     <!-- 共通の項目 -->
                     <div id="common-fields" class="mb-6">
                         <div>
-                            <label for="equipment-cost" class="block text-gray-700 dark:text-gray-300">備品の代金</label>
+                            <label for="equipment-cost" class="block text-gray-700 dark:text-gray-300">備品の代金(円)</label>
                             <input 
                                 type="number" 
                                 name="equipment-cost" 
                                 id="equipment-cost" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="備品の代金を入力してください"
+                                placeholder="備品の代金を入力してください(円)"
                                 step="1"
                                 min="0"
                                 required
                             >
                         </div>
                         <div class="mt-4">
-                            <label for="tool-cost" class="block text-gray-700 dark:text-gray-300">ツールの代金</label>
+                            <label for="tool-cost" class="block text-gray-700 dark:text-gray-300">ツールの代金(円)</label>
                             <input 
                                 type="number" 
                                 name="tool-cost" 
                                 id="tool-cost" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="ツールの代金を入力してください"
+                                placeholder="ツールの代金を入力してください(円)"
                                 step="1"
                                 min="0"
                                 required
@@ -56,19 +56,19 @@
                     <!-- フルタイム用 -->
                     <div id="fulltime-fields" class="mt-4">
                         <div>
-                            <label for="monthly-salary" class="block text-gray-700 dark:text-gray-300">月収</label>
+                            <label for="monthly-salary" class="block text-gray-700 dark:text-gray-300">月収(万円)</label>
                             <input 
                                 type="number" 
                                 name="monthly-salary" 
                                 id="monthly-salary" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="月収を入力してください"
+                                placeholder="月収を入力してください(万円)"
                                 step="1"
                                 min="0"
                             >
                         </div>
                         <div class="mt-4">
-                            <label for="commute-cost" class="block text-gray-700 dark:text-gray-300">定期代金</label>
+                            <label for="commute-cost" class="block text-gray-700 dark:text-gray-300">定期代金(円)</label>
                             <input 
                                 type="number" 
                                 name="commute-cost" 
@@ -84,51 +84,51 @@
                     <!-- パートタイム用 -->
                     <div id="parttime-fields" class="hidden mt-4">
                         <div>
-                            <label for="hourly-wage" class="block text-gray-700 dark:text-gray-300">時給</label>
+                            <label for="hourly-wage" class="block text-gray-700 dark:text-gray-300">時給(円)</label>
                             <input 
                                 type="number" 
                                 name="hourly-wage" 
                                 id="hourly-wage" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="時給を入力してください"
+                                placeholder="時給を入力してください(円)"
                                 step="1"
                                 min="0"
                             >
                         </div>
                         <div class="mt-4">
-                            <label for="hours-per-day" class="block text-gray-700 dark:text-gray-300">働く時間/日</label>
+                            <label for="hours-per-day" class="block text-gray-700 dark:text-gray-300">1日に働く時間</label>
                             <input 
                                 type="number" 
                                 name="hours-per-day" 
                                 id="hours-per-day" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="働く時間/日"
+                                placeholder="1日に働く時間"
                                 step="0.5"
                                 max="24"
                                 min="0"
                             >
                         </div>
                         <div class="mt-4">
-                            <label for="days-per-week" class="block text-gray-700 dark:text-gray-300">働く日数/週</label>
+                            <label for="days-per-week" class="block text-gray-700 dark:text-gray-300">1週間に働く日数</label>
                             <input 
                                 type="number" 
                                 name="days-per-week" 
                                 id="days-per-week" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="働く日数/週"
+                                placeholder="1週間に働く日数"
                                 step="1"
                                 max="7"
                                 min="1"
                             >
                         </div>
                         <div class="mt-4">
-                            <label for="transport-cost" class="block text-gray-700 dark:text-gray-300">交通費/日</label>
+                            <label for="transport-cost" class="block text-gray-700 dark:text-gray-300">1日あたりの交通費</label>
                             <input 
                                 type="number" 
                                 name="transport-cost" 
                                 id="transport-cost" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="交通費/日"
+                                placeholder="1日あたりの交通費"
                                 step="1"
                                 min="0"
                             >
