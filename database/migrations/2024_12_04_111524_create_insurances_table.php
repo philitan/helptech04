@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('insurances', function (Blueprint $table) {
             $table->id();
             $table->integer('salary');
-            $table->integer('health');
-            $table->integer('health_care');
+            $table->float('health');
+            $table->float('health_care');
             $table->integer('welfare');
             $table->timestamps();
         });

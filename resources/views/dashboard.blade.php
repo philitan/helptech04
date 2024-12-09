@@ -20,6 +20,8 @@ use App\Models\Insurance;
                     <?php
                     // 本来は月給を入れる場所、テスト用なので適当に値を入れている
                     $gekyuu = 100000;
+                    $koutuu = 10000;
+                    $goukei = $gekyuu+$koutuu;
                     // 標準報酬のカラムのみ取得
                     $insurances = Insurance::select('salary')->get();
                     // dd($insurances);
@@ -28,7 +30,7 @@ use App\Models\Insurance;
                     $next = 0;
                     foreach($insurances as $salary){
                         $next = $salary->salary;
-                        if($gekyuu < $next){
+                        if($goukei < $next){
                             break;
                         }
                         $id++;
@@ -41,11 +43,11 @@ use App\Models\Insurance;
                     // 労働者と事業主両方を合わせて計算しているため、企業側が何を求めるかによって変わる可能性あり
                     $health = $insurances2->health;
                     $welfare = $insurances2->welfare;
-                    $employment = $gekyuu*0.0155;
+                    $employment = $goukei*0.0155;
 
-                    $kekka = $gekyuu + $health + $welfare + $employment;
+                    $kekka = $goukei + $health + $welfare + $employment;
                     // 出力
-                    echo '月給：'.$gekyuu."<br>";
+                    echo '月給：'.$goukei."<br>";
                     echo '社会保険+雇用保険料込み：'.$kekka;
                     ?>
                 </div>
