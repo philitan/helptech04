@@ -14,7 +14,7 @@ class InsuranceSeeder extends Seeder
     public function run(): void
     {
         // salaryはその等級の給料の範囲の最低
-        // それ以外は保険料で全て全額-折半額となっている
+        // それ以外は保険料で全て折半額となっている
         // idは判別用につけているだけなのでコメントのままで
         Insurance::create([
             // id = 1
