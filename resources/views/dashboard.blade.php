@@ -1,6 +1,8 @@
+<!-- 計算のテスト用に使うモデルの読み込み -->
 <?php
 use App\Models\Insurance;
 ?>
+<!-- モデルの読み込みここまで -->
 
 <x-app-layout>
     <x-slot name="header">
@@ -15,14 +17,15 @@ use App\Models\Insurance;
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
-            <!-- 以下、計算のテスト用 -->
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <!-- 以下、計算のテスト(メモとしてシミュ画面に組み込むまで残しています) -->
+                <div class="p-6 text-green-600 dark:text-green-400">
+                    <p>【計算のテスト用】(シミュ画面に処理を組み込んだら消します)</p>
                     <?php
-                    // 本来は月給、交通費、年齢を入力情報から取得する、今回は計算のテスト用なので適当に値を入れている
-                    $gekyuu = 200000;
-                    $koutuu = 10000;
-                    $age = 25;
-                    $goukei = $gekyuu+$koutuu;
+                    // 本来は月給、交通費、年齢を入力情報から取得する、今回は計算のテストなので適当に値を入れている
+                    $monthly = 200000; // 月給
+                    $traffic = 10000; // 交通費
+                    $age = 25; // 年齢
+                    $base = $monthly+$traffic; // 計算の基準となる額
 
                     // 標準報酬のカラムのみ取得
                     $insurances = Insurance::select('salary')->get();
@@ -31,7 +34,7 @@ use App\Models\Insurance;
                     $next = 0;
                     foreach($insurances as $salary){
                         $next = $salary->salary;
-                        if($goukei < $next){
+                        if($base < $next){
                             break;
                         }
                         $id++;
@@ -40,25 +43,43 @@ use App\Models\Insurance;
                     // 見つけ出したIDで今度はその行のみ取得
                     $insurances2 = Insurance::find($id);
                     // 社会保険料の計算をする
+                    // 端数処理の補足:従業員負担は0.5以下は切り捨て、0.5を超える場合は切り上げとなる
+                    // 逆に言えば、従業員負担が切り捨て(0.5以下)だと事業主の方が1円足される
                     if($age >= 40){
                         $health = $insurances2->health_care;
                     } else {
                         $health = $insurances2->health;
                     }
+                    $fraction = $health - (int)$health;
+                    if($fraction <= 0.5){
+                        $health += 1;
+                    }
+                    $health = (int)$health;
+
                     $welfare = $insurances2->welfare;
-                    $employment = $goukei*0.0155;
+                    $fraction = $welfare - (int)$welfare;
+                    if($fraction <= 0.5){
+                        $welfare += 1;
+                    }
+                    $welfare = (int)$welfare;
 
-                    $kekka = $goukei + $health + $welfare + $employment;
-                    $kekka = (int)$kekka;
+                    $employment = $base*0.0095;
+                    $fraction = $employment - (int)$employment;
+                    if($fraction <= 0.5){
+                        $employment += 1;
+                    }
+                    $employment = (int)$employment;
 
-                    // 出力
-                    echo '月給：'.$gekyuu."<br>";
-                    echo '交通費：'.$koutuu."<br>";
+                    $result = $base + $health + $welfare + $employment;
+
+                    // 出力(テストということで一応全て出力している)
+                    echo '月給：'.$monthly."<br>";
+                    echo '交通費：'.$traffic."<br>";
                     echo '年齢：'.$age."歳<br>";
-                    echo '社会保険料込み：'.$kekka;
+                    echo '社会保険料込み：'.$result;
                     ?>
                 </div>
-            <!-- テスト用ここまで -->
+            <!-- 計算のテストここまで -->
             </div>
         </div>
     </div>
