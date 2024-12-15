@@ -6,6 +6,7 @@
     </x-slot>
 
     <div class="py-4">
+        <a href="{{route('tools.create')}}" class="ml-4 px-4 py-4 bg-gray-500 text-white rounded-lg hover:bg-gray-700" style="margin-left: 6%;  position:fixed; z-index:900; bottom:5%;">ツールを追加する</a>
         <!-- 検索フォーム -->
         <form action="{{ route('tools.search') }}" method="GET" class="mb-6">
             <div class="flex items-center">
@@ -14,12 +15,11 @@
                     style="width: 60rem; margin-left:3%; "
                     placeholder="ツールを検索..."
                     value="{{ request('keyword') }}">
-                <button type="submit" class="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-black-700" style="margin-right:3%">
+                <button type="submit" class="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-700" style="margin-right:3%">
                     検索
                 </button>
             </div>
         </form>
-
         @foreach($tools as $tool)
         <div class="mx-auto sm:px-6 lg:px-8 w-[94%]">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
@@ -28,25 +28,34 @@
                     <p class="text-gray-800 dark:text-gray-300 text-lg">
                         {{ $tool->name }}
                     </p>
-                    <!-- 値段 -->
-                    <p class="text-gray-800 dark:text-gray-300 text-lg font-bold">
-                        ¥{{ intval($tool->price) }}
-                    </p>
-                    <div class="flex">
+                    <div class="flex items-center justify-between w-64">
+                        <!-- 値段 -->
+                        <p class="text-gray-800 dark:text-gray-300 text-lg font-bold text-center flex-1">
+                            ¥{{ intval($tool->price) }}
+                        </p>
+
                         <!-- 編集リンク -->
-                        <a href="{{ route('tools.edit', $tool) }}" class="text-gray-500 hover:text-black-700 mr-2">編集する</a>
+                        <a href="{{ route('tools.edit', $tool) }}" class="text-gray-500 hover:text-black-700 text-center flex-1">
+                            編集
+                        </a>
 
                         <!-- 削除フォーム -->
-                        <form action="{{ route('tools.destroy', $tool) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                        <form action="{{ route('tools.destroy', $tool) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');" class="text-center flex-1">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-gray-500 hover:text-black-700">削除する</button>
+                            <button type="submit" class="text-gray-500 hover:text-black-700">
+                                削除
+                            </button>
                         </form>
                     </div>
+
+
+
+
                 </div>
             </div>
         </div>
         @endforeach
-
     </div>
+
 </x-app-layout>
