@@ -21,9 +21,6 @@
                     <x-nav-link :href="route('tools.index')" :active="request()->routeIs('tools.index')">
                         {{ __('ツール一覧') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tools.create')" :active="request()->routeIs('tools.create')">
-                        {{ __('ツールの追加') }}
-                    </x-nav-link>
 
                 </div>
             </div>
@@ -86,9 +83,7 @@
             <x-responsive-nav-link :href="route('tools.index')" :active="request()->routeIs('tools.index')">
                 {{ __('tools') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('tools.create')" :active="request()->routeIs('tools.create')">
-                {{ __('tools') }}
-            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
