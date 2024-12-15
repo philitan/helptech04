@@ -1,3 +1,6 @@
+<?php
+use App\Models\Tools;
+?>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -8,8 +11,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ route('result.index') }}" method="GET">
-                    
+                <form action="{{ route('result.index') }}" method="POST">
+                    @csrf
                     <!-- 共通の項目 -->
                     <div id="common-fields" class="mb-6">
                         <div>
@@ -26,17 +29,17 @@
                             >
                         </div>
                         <div class="mt-4">
-                            <label for="tool-cost" class="block text-gray-700 dark:text-gray-300">ツールの代金(円)</label>
-                            <input 
-                                type="number" 
-                                name="tool-cost" 
-                                id="tool-cost" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="ツールの代金を入力してください(円)"
-                                step="1"
-                                min="0"
-                                required
-                            >
+                            <label for="tool-cost">現在使用しているツールの選択</label>
+                            <?php
+                            $tools = Tools::select('name')->get();
+                            foreach ($tools as $item) {
+                                $value = $item["name"];
+                                echo '<div>';
+                                echo '<input type="checkbox" id="tool-cost" name="tool-cost[]" value="'.$value.'">';
+                                echo ' '.$value;
+                                echo '</div>';
+                            }
+                            ?>
                         </div>
                     </div>
 
