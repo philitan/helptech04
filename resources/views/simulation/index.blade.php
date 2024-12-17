@@ -29,7 +29,20 @@ use App\Models\Tools;
                                 required
                             >
                         </div>
-                        <div class="mt-4">
+                        <div>
+                            <label for="age" class="block text-gray-700 dark:text-gray-300">年齢(歳)</label>
+                            <input 
+                                type="number" 
+                                name="age" 
+                                id="age" 
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="年齢を入力してください(歳)"
+                                step="1"
+                                min="0"
+                                required
+                            >
+                        </div>
+                        <div>
                             <label for="tool-cost">現在使用しているツールの選択</label>
                             <?php
                             $tools = Tools::select('name')->get();
