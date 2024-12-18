@@ -16,24 +16,6 @@ use App\Models\Insurance;
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                 <?php
                     // dd($_POST);
-                    // foreach($_POST as $key => $value){
-                    //     if($key === "tool-cost"){
-                    //         echo "tool-cost {<br>";
-                    //         foreach($value as $key2 => $value2){
-                    //             $tools = Tools::where('name', '=', $value2)->get();
-                    //             foreach($tools as $tool){
-                    //                 $price = $tool->price;
-                    //                 echo "  ".$value2." = ".(int)$price."<br>";
-                    //             }
-                    //         }
-                    //         echo "}<br>";
-                    //     }
-                    //     else if($key !== "_token"){
-                    //         if(!empty($value)){
-                    //             echo $key." = ".$value."<br>";
-                    //         }
-                    //     }
-                    // }
 
                     // 入力されたデータの取得
                     $monthly = $_POST["monthly-salary"] * 10000; // 月給(万円を円に直す)
@@ -104,11 +86,14 @@ use App\Models\Insurance;
                 <p>ランニングコスト：<?= $result ?>円</p>
                 <br>
 
-                <p>【入力情報】</p>
+                <p>【詳細】</p>
                 <p>月給：<?= ($monthly/10000) ?>万円</p>
-                <p>月額の交通費：<?= $traffic ?>円</p>
+                <p>月毎の交通費：<?= $traffic ?>円</p>
+                <br>
+
                 <p>備品代：<?= $_POST["equipment-cost"] ?>円</p>
-                <p>使用ツール：
+                <p>月毎のツール代：<?= $toolcost ?>円</p>
+                <p>(使用ツール：
                 <?php
                     foreach($_POST["tool-cost"] as $key => $value){
                         if($key+1 == count($_POST["tool-cost"])){
@@ -118,9 +103,14 @@ use App\Models\Insurance;
                         }
                     }
                 ?>
-                </p>
-                <p>(ツールの月額代：<?= $toolcost ?>円)</p>
+                )</p>
+                <br>
+
                 <p>年齢：<?= $age ?>歳</p>
+                <p>(介護保険の支払い：<?= $age>=40 ? "あり" : "なし" ?>)</p>
+                <p>社会保険料(会社側負担)：<?= $health+$welfare ?>円</p>
+                <p>(<?= $age>=40 ? "健康保険+介護保険" : "健康保険" ?>：<?= $health ?>円、厚生年金：<?= $welfare ?>円)</p>
+                <p>雇用保険料(会社側負担)：<?= $employment ?>円</p>
                 </div>
             </div>
         </div>
