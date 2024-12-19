@@ -11,6 +11,10 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                 </div>
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">雇用形態: {{ $employmentType === 'fulltime' ? 'フルタイム' : 'パートタイム' }}</h3>
+                </div>
+
             </div>
         </div>
     </div>

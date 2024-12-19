@@ -151,17 +151,18 @@
         const fulltimeFields = document.querySelectorAll('#fulltime-fields input');
         const parttimeFields = document.querySelectorAll('#parttime-fields input');
 
-        toggleText.innerText = isPartTime ? 'パートタイム' : 'フルタイム';
 
-        // パートタイムの場合
+
+        // 雇用形態の値を変更する
+        employmentTypeField.value = isPartTime ? 'parttime' : 'fulltime';
+
+        // フィールドの必須状態と表示を切り替える
         if (isPartTime) {
             fulltimeFields.forEach(field => field.required = false);
             parttimeFields.forEach(field => field.required = true);
             document.getElementById('parttime-fields').classList.remove('hidden');
             document.getElementById('fulltime-fields').classList.add('hidden');
-        } 
-        // フルタイムの場合
-        else {
+        } else {
             fulltimeFields.forEach(field => field.required = true);
             parttimeFields.forEach(field => field.required = false);
             document.getElementById('parttime-fields').classList.add('hidden');
