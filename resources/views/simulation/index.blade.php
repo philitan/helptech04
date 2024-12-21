@@ -168,10 +168,8 @@ use App\Models\Tools;
         const fulltimeFields = document.querySelectorAll('#fulltime-fields input');
         const parttimeFields = document.querySelectorAll('#parttime-fields input');
 
-
-
-        // 雇用形態の値を変更する
-        employmentTypeField.value = isPartTime ? 'parttime' : 'fulltime';
+        // 雇用形態の表示を変更
+        toggleText.textContent = isPartTime ? 'パートタイム' : 'フルタイム';
 
         // フィールドの必須状態と表示を切り替える
         if (isPartTime) {
@@ -186,4 +184,5 @@ use App\Models\Tools;
             document.getElementById('fulltime-fields').classList.remove('hidden');
         }
     }
+
 </script>
