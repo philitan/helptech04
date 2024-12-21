@@ -22,7 +22,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="equipment-cost" 
                                 id="equipment-cost" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="備品の代金を入力してください(円)"
                                 step="1"
                                 min="0"
@@ -35,7 +35,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="age" 
                                 id="age" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="年齢を入力してください(歳)"
                                 step="1"
                                 min="0"
@@ -43,7 +43,7 @@ use App\Models\Tools;
                             >
                         </div>
                         <div>
-                            <label for="tool-cost">現在使用しているツールの選択</label>
+                            <label for="tool-cost" class="block text-gray-700 dark:text-gray-300">現在使用しているツールの選択</label>
                             <?php
                             $tools = Tools::select('name')->get();
                             foreach ($tools as $item) {
@@ -79,7 +79,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="monthly-salary" 
                                 id="monthly-salary" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="月収を入力してください(万円)"
                                 step="1"
                                 min="0"
@@ -91,7 +91,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="commute-cost" 
                                 id="commute-cost" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="定期代金を入力してください"
                                 step="1"
                                 min="0"
@@ -107,7 +107,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="hourly-wage" 
                                 id="hourly-wage" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="時給を入力してください(円)"
                                 step="1"
                                 min="0"
@@ -119,7 +119,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="hours-per-day" 
                                 id="hours-per-day" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="1日に働く時間"
                                 step="0.5"
                                 max="24"
@@ -132,7 +132,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="days-per-week" 
                                 id="days-per-week" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="1週間に働く日数"
                                 step="1"
                                 max="7"
@@ -145,7 +145,7 @@ use App\Models\Tools;
                                 type="number" 
                                 name="transport-cost" 
                                 id="transport-cost" 
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="1日あたりの交通費"
                                 step="1"
                                 min="0"
