@@ -42,19 +42,22 @@ use App\Models\Tools;
                                 required
                             >
                         </div>
+                        
+                        <!-- チェックboxの処理 -->
                         <div>
                             <label for="tool-cost" class="block text-gray-700 dark:text-gray-300">現在使用しているツールの選択</label>
                             <?php
                             $tools = Tools::select('name')->get();
                             foreach ($tools as $item) {
                                 $value = $item["name"];
-                                echo '<div>';
-                                echo '<input type="checkbox" id="tool-cost" name="tool-cost[]" value="'.$value.'">';
-                                echo ' '.$value;
+                                echo '<div class="flex items-center space-x-3 mb-2">';
+                                echo '<input type="checkbox" id="tool-cost" name="tool-cost[]" value="'.$value.'" class="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">';
+                                echo '<label for="tool-cost" class="text-gray-700 dark:text-gray-300">'.$value.'</label>';
                                 echo '</div>';
                             }
                             ?>
                         </div>
+
                     </div>
 
                     <!-- 雇用形態の切り替え -->
@@ -86,14 +89,13 @@ use App\Models\Tools;
                             >
                         </div>
                         <div class="mt-4">
-                            <label for="commute-cost" class="block text-gray-700 dark:text-gray-300">定期代金(円)</label>
+                            <label for="commute-cost" class="block text-gray-700 dark:text-gray-300">1月あたりの定期代金(円)</label>
                             <input 
                                 type="number" 
                                 name="commute-cost" 
                                 id="commute-cost" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="定期代金を入力してください"
-                                step="1"
+                                placeholder="定期代金を入力してください
                                 min="0"
                             >
                         </div>
