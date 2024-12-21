@@ -6,6 +6,7 @@
     </x-slot>
 
     <div class="py-12">
+        <a href="{{route('tools.index')}}" class="ml-4 px-4 py-4 bg-gray-500 text-white rounded-lg hover:bg-gray-700" style="margin-left: 6%;  position:fixed; z-index:900; bottom:5%;">一覧に戻る</a>
         <div class="mx-auto sm:px-6 lg:px-8 w-[94%]">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
