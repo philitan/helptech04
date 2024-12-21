@@ -17,7 +17,7 @@ use App\Models\Insurance;
                 <?php
                     //フルタイムの時の処理
                     if ($_POST["employment-type"] === "fulltime") {
-                        dd($_POST);
+                        // dd($_POST);
 
                         // 入力されたデータの取得
                         $monthly = $_POST["monthly-salary"] * 10000; // 月給(万円を円に直す)
@@ -84,7 +84,7 @@ use App\Models\Insurance;
                     }
                     //パートタイムの時の処理
                     else{
-                        dd($_POST);
+                        // dd($_POST);
 
                         // 入力されたデータの取得
                         $monthly = $_POST["hourly-wage"] *$_POST["hours-per-day"]* $_POST["days-per-week"]*4; // 月給(1ヶ月4週間とする))
@@ -149,6 +149,7 @@ use App\Models\Insurance;
                         $result = $base + $health + $welfare + $employment + $toolcost;
                         $first = $result + $_POST["equipment-cost"];
                     }
+                    $employmentType = $_POST["employment-type"]; // 変数名を修正
                 ?>
 
 
