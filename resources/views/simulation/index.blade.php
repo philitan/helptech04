@@ -69,6 +69,7 @@ use App\Models\Tools;
                             <span id="toggle-text" class="ml-3 text-gray-900 dark:text-gray-100">フルタイム</span>
                         </div>
                     </div>
+                    <input type="hidden" name="employment-type" id="employment-type" value="fulltime">
 
                     <!-- フルタイム用 -->
                     <div id="fulltime-fields" class="mt-4">
@@ -167,9 +168,13 @@ use App\Models\Tools;
         const toggleText = document.getElementById('toggle-text');
         const fulltimeFields = document.querySelectorAll('#fulltime-fields input');
         const parttimeFields = document.querySelectorAll('#parttime-fields input');
+        const employmentTypeField = document.getElementById('employment-type'); // 隠しフィールドの取得
 
         // 雇用形態の表示を変更
         toggleText.textContent = isPartTime ? 'パートタイム' : 'フルタイム';
+
+        // 雇用形態の隠しフィールドに値を設定
+        employmentTypeField.value = isPartTime ? 'parttime' : 'fulltime';
 
         // フィールドの必須状態と表示を切り替える
         if (isPartTime) {
@@ -184,5 +189,4 @@ use App\Models\Tools;
             document.getElementById('fulltime-fields').classList.remove('hidden');
         }
     }
-
 </script>

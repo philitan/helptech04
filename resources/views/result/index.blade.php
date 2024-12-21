@@ -15,7 +15,7 @@ use App\Models\Insurance;
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                 <?php
-                    // dd($_POST);
+                    dd($_POST);
 
                     // 入力されたデータの取得
                     $monthly = $_POST["monthly-salary"] * 10000; // 月給(万円を円に直す)
