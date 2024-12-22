@@ -188,6 +188,8 @@ use App\Models\Insurance;
                 <div class="mt-6">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">雇用形態: {{ $employmentType === 'fulltime' ? 'フルタイム' : 'パートタイム' }}</h3>
                 </div>
+                
+                <p>手取り</p>
 
             </div>
         </div>
