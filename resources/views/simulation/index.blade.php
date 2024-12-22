@@ -84,7 +84,7 @@ use App\Models\Tools;
                                 id="monthly-salary" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="月収を入力してください(万円)"
-                                step="1"
+                                step="0.1"
                                 min="0"
                             >
                         </div>
@@ -95,7 +95,7 @@ use App\Models\Tools;
                                 name="commute-cost" 
                                 id="commute-cost" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="定期代金を入力してください
+                                placeholder="定期代金を入力してください"
                                 min="0"
                             >
                         </div>
