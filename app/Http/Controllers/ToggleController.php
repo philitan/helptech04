@@ -11,3 +11,4 @@ class ToggleController extends Controller
         return response()->json(['message' => $state ? 'パートタイム' : 'フルタイム']);
     }
 }
+
