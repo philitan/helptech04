@@ -12,7 +12,7 @@
             <div class="flex items-center">
                 <input type="text" name="keyword"
                     class="shadow appearance-none border rounded py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    style="width: 60rem; margin-left:3%; "
+                    style="width: 80rem; margin-left:3%; "
                     placeholder="ツールを検索..."
                     value="{{ request('keyword') }}">
                 <button type="submit" class="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-700" style="margin-right:3%">
