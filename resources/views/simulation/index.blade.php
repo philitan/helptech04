@@ -53,7 +53,7 @@ use App\Models\Tools;
                             foreach ($tools as $item) {
                                 $value = $item["name"];
                                 echo '<div class="flex items-center space-x-3 mb-2">';
-                                echo '<input type="checkbox" id="tool-cost" name="tool-cost[]" value="' . $value . '" class="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" style="margin-left:2%;">';
+                                echo '<input type="checkbox" id="tool-cost" name="tool-cost[]" value="' . $value . '" class="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" style="margin-left:2.5%;">';
                                 echo '<label for="tool-cost" class="text-gray-700 dark:text-gray-300" style="margin-left:1%;">' . $value . '</label>';
                                 echo '</div>';
                             }
@@ -158,7 +158,7 @@ use App\Models\Tools;
                         </div>
                     </div>
 
-                    <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:2%;">
+                    <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
                         シミュレーションを実行
                     </button>
                 </form>
