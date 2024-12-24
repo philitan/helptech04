@@ -30,11 +30,13 @@ use App\Models\Insurance;
 
                     // ツール費用の計算
                     $toolcost = 0;
-                    foreach($_POST["tool-cost"] as $key => $value){
-                        $tools = Tools::where('name', '=', $value)->get();
-                        foreach($tools as $tool){
-                            $price = $tool->price;
-                            $toolcost += $price;
+                    if(isset($_POST["tool-cost"])){
+                        foreach($_POST["tool-cost"] as $key => $value){
+                            $tools = Tools::where('name', '=', $value)->get();
+                            foreach($tools as $tool){
+                                $price = $tool->price;
+                                $toolcost += $price;
+                            }
                         }
                     }
 
@@ -112,7 +114,7 @@ use App\Models\Insurance;
 
                 <p>【詳細】</p>
                 <p>月給：<?= ($monthly/10000) ?>万円</p>
-                <p>(手取り：<?= $income ?>円)※税金は現状未反映</p>
+                <p>(手取り：<?= $income ?>円)※税金は未反映</p>
                 <p>月毎の交通費：<?= $traffic ?>円</p>
                 <br>
 
@@ -120,6 +122,7 @@ use App\Models\Insurance;
                 <p>月毎のツール代：<?= $toolcost ?>円</p>
                 <p>(使用ツール：
                 <?php
+                if(isset($_POST["tool-cost"])){
                     foreach($_POST["tool-cost"] as $key => $value){
                         if($key+1 == count($_POST["tool-cost"])){
                             echo $value;
@@ -127,6 +130,9 @@ use App\Models\Insurance;
                             echo $value.", ";
                         }
                     }
+                } else {
+                    echo "なし";
+                }
                 ?>
                 )</p>
                 <br>
