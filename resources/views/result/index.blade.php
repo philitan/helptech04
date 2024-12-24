@@ -114,7 +114,7 @@ use App\Models\Insurance;
 
                 <p class="text-xl font-bold">詳細情報</p>
                 <p>月給：<?= ($monthly / 10000) ?>万円</p>
-                <p style="margin-left: 2%; padding-bottom:2%;">(手取り：<?= $income ?>円)※税金は未反映</p>
+                <p>(手取り：<?= $income ?>円)※税金は未反映</p>
                 <p>月毎の交通費：<?= $traffic ?>円</p>
                 <br>
 
