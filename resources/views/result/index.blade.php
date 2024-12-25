@@ -19,12 +19,12 @@ use App\Models\Insurance;
                 // 入力されたデータの取得
                 if ($_POST["employment-type"] === "fulltime") {
                     // フルタイム
-                    $monthly = $_POST["monthly-salary"] * 10000; // 月給(万円を円に直す)
+                    $monthly = $_POST["monthly-salary"] ; // 月給(万円を円に直す)
                     $traffic = $_POST["commute-cost"]; // 交通費
                 } else {
                     // パートタイム
-                    $monthly = $_POST["hourly-wage"] *$_POST["hours-per-day"]* $_POST["days-per-week"]*4; // 月給(1ヶ月4週間とする))
-                    $traffic = $_POST["transport-cost"]* $_POST["days-per-week"]*4; // 1ヶ月の交通費
+                    $monthly = $_POST["hourly-wage"] *$_POST["hours-per-day"]* $_POST["days-per-week"]*4.33; // 月給(1ヶ月4.33週間とする))
+                    $traffic = $_POST["transport-cost"]* $_POST["days-per-week"]*4.33; // 1ヶ月の交通費
                 }
                 $age = $_POST["age"]; // 年齢
 

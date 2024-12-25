@@ -80,7 +80,7 @@ use App\Models\Tools;
                     <!-- フルタイム用 -->
                     <div id="fulltime-fields" class="mt-4" style=" margin-left: 1%;  ">
                         <div>
-                            <label for="monthly-salary" class="block text-l font-bold text-gray-700 dark:text-gray-300">月収(万円)</label>
+                            <label for="monthly-salary" class="block text-l font-bold text-gray-700 dark:text-gray-300">月収(円)</label>
                             <input
                                 type="number"
                                 name="monthly-salary"
