@@ -6,16 +6,16 @@
     </x-slot>
 
     <div class="py-4">
-        <a href="{{route('tools.create')}}" class="ml-4 px-4 py-4 bg-gray-500 text-white rounded-lg hover:bg-gray-700" style="margin-left: 6%;  position:fixed; z-index:900; bottom:5%;">ツールを追加する</a>
+        <a href="{{route('tools.create')}}" class="ml-4 px-4 py-4 bg-gray-700 text-white rounded-lg hover:bg-gray-800" style="margin-left: 6%;  position:fixed; z-index:900; bottom:5%;">ツールを追加する</a>
         <!-- 検索フォーム -->
         <form action="{{ route('tools.search') }}" method="GET" class="mb-6">
             <div class="flex items-center">
                 <input type="text" name="keyword"
                     class="shadow appearance-none border rounded py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    style="width: 60rem; margin-left:3%; "
+                    style="width: 80rem; margin-left:3%; "
                     placeholder="ツールを検索..."
                     value="{{ request('keyword') }}">
-                <button type="submit" class="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-700" style="margin-right:3%">
+                <button type="submit" class="ml-4 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800" style="margin-right:3%">
                     検索
                 </button>
             </div>
