@@ -92,7 +92,7 @@ use App\Models\Insurance;
                 $result = $base + $health + $welfare + $employment + $toolcost;
                 $first = $result + $_POST["equipment-cost"];
 
-                // 手取りの計算
+                // 手取りの計算(未完成)
                 $employment2 = $monthly*0.006;
                 $fraction = $employment2 - (int)$employment2;
                 if($fraction > 0.5){
@@ -114,7 +114,7 @@ use App\Models\Insurance;
 
                 <p class="text-xl font-bold">詳細情報</p>
                 <p>月給：<?= ($monthly / 10000) ?>万円</p>
-                <p>(手取り：<?= $income ?>円)※税金は未反映</p>
+                <p>(手取り(仮)：<?= $income ?>円)※未完成</p>
                 <p>月毎の交通費：<?= $traffic ?>円</p>
                 <br>
 
