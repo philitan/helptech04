@@ -22,8 +22,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('simulation', SimulationController::class);
     Route::get('/simulation-index', [SimulationController::class, 'index'])->name('simulation.index');
+    Route::get('/simulation-index2', [SimulationController::class, 'index2'])->name('simulation.add');
     Route::get('/simulation-tools', [SimulationController::class, 'tools'])->name('simulation.tools');
-    Route::post('/result-index',[ResultController::class,'index'])->name('result.index');
+    Route::post('/result-index', [ResultController::class, 'index'])->name('result.index');
 
 
     Route::resource('tools', ToolsController::class);
