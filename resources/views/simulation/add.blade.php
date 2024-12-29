@@ -13,7 +13,7 @@ use App\Models\Tools;
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-8 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ route('result.index') }}" method="POST">
+                <form action="{{ route('result.index2') }}" method="POST">
                     @csrf
                     <!-- 共通の項目 -->
                     <div id="common-fields" class="mb-6" style="margin-top: 2%; margin-left:1%;">
@@ -178,11 +178,11 @@ use App\Models\Tools;
                             <!-- フルタイム用 -->
                             <div id="fulltime-fields-2" class="mt-4" style=" margin-left: 1%;  ">
                                 <div>
-                                    <label for="monthly-salary" class="block text-l font-bold text-gray-700 dark:text-gray-300">月収(万円)</label>
+                                    <label for="monthly-salary-2" class="block text-l font-bold text-gray-700 dark:text-gray-300">月収(万円)</label>
                                     <input
                                         type="number"
-                                        name="monthly-salary"
-                                        id="monthly-salary"
+                                        name="monthly-salary-2"
+                                        id="monthly-salary-2"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
                                         placeholder=""
@@ -190,11 +190,11 @@ use App\Models\Tools;
                                         min="0">
                                 </div>
                                 <div class="mt-4">
-                                    <label for="commute-cost" class="block text-l font-bold text-gray-700 dark:text-gray-300">1ヶ月の定期代金(円)</label>
+                                    <label for="commute-cost-2" class="block text-l font-bold text-gray-700 dark:text-gray-300">1ヶ月の定期代金(円)</label>
                                     <input
                                         type="number"
-                                        name="commute-cost"
-                                        id="commute-cost"
+                                        name="commute-cost-2"
+                                        id="commute-cost-2"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
                                         placeholder=""
@@ -205,11 +205,11 @@ use App\Models\Tools;
                             <!-- パートタイム用 -->
                             <div id="parttime-fields-2" class="hidden mt-4" style=" margin-left: 1%;  ">
                                 <div>
-                                    <label for="hourly-wage" class="block text-l font-bold text-gray-700 dark:text-gray-300">時給(円)</label>
+                                    <label for="hourly-wage-2" class="block text-l font-bold text-gray-700 dark:text-gray-300">時給(円)</label>
                                     <input
                                         type="number"
-                                        name="hourly-wage"
-                                        id="hourly-wage"
+                                        name="hourly-wage-2"
+                                        id="hourly-wage-2"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
                                         placeholder=""
@@ -217,11 +217,11 @@ use App\Models\Tools;
                                         min="0">
                                 </div>
                                 <div class="mt-4">
-                                    <label for="hours-per-day" class="block text-l font-bold text-gray-700 dark:text-gray-300">1日に働く時間(h) </label>
+                                    <label for="hours-per-day-2" class="block text-l font-bold text-gray-700 dark:text-gray-300">1日に働く時間(h) </label>
                                     <input
                                         type="number"
-                                        name="hours-per-day"
-                                        id="hours-per-day"
+                                        name="hours-per-day-2"
+                                        id="hours-per-day-2"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
                                         placeholder=""
@@ -230,11 +230,11 @@ use App\Models\Tools;
                                         min="0">
                                 </div>
                                 <div class="mt-4">
-                                    <label for="days-per-week" class="block text-l font-bold text-gray-700 dark:text-gray-300">1週間に働く日数(日)</label>
+                                    <label for="days-per-week-2" class="block text-l font-bold text-gray-700 dark:text-gray-300">1週間に働く日数(日)</label>
                                     <input
                                         type="number"
-                                        name="days-per-week"
-                                        id="days-per-week"
+                                        name="days-per-week-2"
+                                        id="days-per-week-2"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
                                         placeholder=""
@@ -243,11 +243,11 @@ use App\Models\Tools;
                                         min="1">
                                 </div>
                                 <div class="mt-4">
-                                    <label for="transport-cost" class="block text-l font-bold text-gray-700 dark:text-gray-300">1日あたりの交通費</label>
+                                    <label for="transport-cost-2" class="block text-l font-bold text-gray-700 dark:text-gray-300">1日あたりの交通費</label>
                                     <input
                                         type="number"
-                                        name="transport-cost"
-                                        id="transport-cost"
+                                        name="transport-cost-2"
+                                        id="transport-cost-2"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
                                         placeholder=""
