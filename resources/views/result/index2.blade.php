@@ -145,7 +145,7 @@ use App\Models\Insurance;
                         if ($age >= 40) {
                             $health3 = $insurances4->health_care;
                         } else {
-                            $health3 = $insurances4->health3;
+                            $health3 = $insurances4->health;
                         }
                         $health4 = $health3;
                         $fraction2 = $health3 - (int)$health3;
@@ -155,7 +155,7 @@ use App\Models\Insurance;
                         $health3 = (int)$health3;
                         $health4 = (int)$health4;
 
-                        $welfare3 = $insurances4->welfare3;
+                        $welfare3 = $insurances4->welfare;
                         $welfare4 = $welfare3;
                         $fraction2 = $welfare3 - (int)$welfare3;
                         if ($fraction2 > 0) {
