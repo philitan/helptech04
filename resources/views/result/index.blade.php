@@ -93,15 +93,15 @@ use App\Models\Insurance;
                 $first = $result + $_POST["equipment-cost"];
 
                 // 手取りの計算(未完成)
-                $employment2 = $monthly*0.006;
-                $fraction = $employment2 - (int)$employment2;
-                if($fraction > 0.5){
-                    $employment2 += 1;
-                }
-                $employment2 = (int)$employment2;
+                // $employment2 = $monthly*0.006;
+                // $fraction = $employment2 - (int)$employment2;
+                // if($fraction > 0.5){
+                //     $employment2 += 1;
+                // }
+                // $employment2 = (int)$employment2;
 
-                $social = $health2 + $welfare2 + $employment2; // 控除額の計算
-                $income = $monthly - $social; // 月給から控除額を排除
+                // $social = $health2 + $welfare2 + $employment2; // 控除額の計算
+                // $income = $monthly - $social; // 月給から控除額を排除
 
                 $employmentType = $_POST["employment-type"]; // 変数名を修正
             ?>
@@ -114,7 +114,7 @@ use App\Models\Insurance;
 
                 <p class="text-xl font-bold">詳細情報</p>
                 <p>月給：<?= ($monthly / 10000) ?>万円</p>
-                <p>(手取り(仮)：<?= $income ?>円)※未完成</p>
+                <p>(手取り(大体)：<?= $monthly*0.75 ?>円～<?= $monthly*0.85 ?>円)</p>
                 <p>月毎の交通費：<?= $traffic ?>円</p>
                 <br>
 
