@@ -39,6 +39,7 @@ use App\Models\Insurance;
                       }
                   }
                 }
+                // 社会保険料と雇用保険料の計算
 
                 // 社会保険料の計算の準備
                 $base = $monthly + $traffic; // 基準となる金額の算出
@@ -58,35 +59,90 @@ use App\Models\Insurance;
                 // 見つけ出したIDで今度はその行のみ取得
                 $insurances2 = Insurance::find($id);
 
-                // 社会保険料と雇用保険料の計算
-                if ($age >= 40) {
-                    $health = $insurances2->health_care;
+                // 雇用形態での分岐
+                if($_POST["employment-type"] === "fulltime"){
+                    // 社会保険料の計算
+                    if ($age >= 40) {
+                        $health = $insurances2->health_care;
+                    } else {
+                        $health = $insurances2->health;
+                    }
+                    // $health2 = $health;
+                    $fraction = $health - (int)$health;
+                    if ($fraction > 0) {
+                        $health += 1;
+                    }
+                    $health = (int)$health;
+                    // $health2 = (int)$health2;
+
+                    $welfare = $insurances2->welfare;
+                    // $welfare2 = $welfare;
+                    $fraction = $welfare - (int)$welfare;
+                    if ($fraction > 0) {
+                        $welfare += 1;
+                    }
+                    $welfare = (int)$welfare;
+                    // $welfare2 = (int)$welfare2;
+
+                    // 雇用保険料の計算
+                    $employment = $monthly * 0.0095;
+                    $fraction = $employment - (int)$employment;
+                    if ($fraction >= 0.5) {
+                        $employment += 1;
+                    }
+                    $employment = (int)$employment;
                 } else {
-                    $health = $insurances2->health;
-                }
-                $health2 = $health;
-                $fraction = $health - (int)$health;
-                if ($fraction > 0) {
-                    $health += 1;
-                }
-                $health = (int)$health;
-                $health2 = (int)$health2;
+                    // 1週間に働く時間の計算
+                    $weektime = $_POST["hours-per-day"]* $_POST["days-per-week"];
+                    if($weektime >= 30){
+                        // 週30時間以上の処理(フルタイムと同じ)
+                        // 社会保険料の計算
+                        if ($age >= 40) {
+                            $health = $insurances2->health_care;
+                        } else {
+                            $health = $insurances2->health;
+                        }
+                        // $health2 = $health;
+                        $fraction = $health - (int)$health;
+                        if ($fraction > 0) {
+                            $health += 1;
+                        }
+                        $health = (int)$health;
+                        // $health2 = (int)$health2;
 
-                $welfare = $insurances2->welfare;
-                $welfare2 = $welfare;
-                $fraction = $welfare - (int)$welfare;
-                if ($fraction > 0) {
-                    $welfare += 1;
-                }
-                $welfare = (int)$welfare;
-                $welfare2 = (int)$welfare2;
+                        $welfare = $insurances2->welfare;
+                        // $welfare2 = $welfare;
+                        $fraction = $welfare - (int)$welfare;
+                        if ($fraction > 0) {
+                            $welfare += 1;
+                        }
+                        $welfare = (int)$welfare;
+                        // $welfare2 = (int)$welfare2;
 
-                $employment = $monthly * 0.0095;
-                $fraction = $employment - (int)$employment;
-                if ($fraction >= 0.5) {
-                    $employment += 1;
+                        // 雇用保険料の計算
+                        $employment = $monthly * 0.0095;
+                        $fraction = $employment - (int)$employment;
+                        if ($fraction >= 0.5) {
+                            $employment += 1;
+                        }
+                        $employment = (int)$employment;
+                    } else if($weektime >= 20 && $weektime < 30){
+                        // 週20時間以上30時間未満の処理(雇用保険料のみ)
+                        $employment = $monthly * 0.0095;
+                        $fraction = $employment - (int)$employment;
+                        if ($fraction >= 0.5) {
+                            $employment += 1;
+                        }
+                        $employment = (int)$employment;
+                        $health = 0;
+                        $welfare = 0;
+                    } else {
+                        // 週20時間未満の処理(両方なし)
+                        $health = 0;
+                        $welfare = 0;
+                        $employment = 0;
+                    }
                 }
-                $employment = (int)$employment;
 
                 // 初期費用とランニングコストを計算
                 $result = $base + $health + $welfare + $employment + $toolcost;
@@ -139,6 +195,13 @@ use App\Models\Insurance;
 
                 <p>年齢：<?= $age ?>歳</p>
                 <p>(介護保険の支払い：<?= $age >= 40 ? "あり" : "なし" ?>)</p>
+                <?php
+                if($_POST["employment-type"] === "parttime"){
+                    echo "1週間で働く時間：".$weektime."時間<br>";
+                }
+                ?>
+                <br>
+
                 <p>社会保険料(会社側負担)：<?= $health + $welfare ?>円</p>
                 <p>(<?= $age >= 40 ? "健康保険+介護保険" : "健康保険" ?>：<?= $health ?>円、厚生年金：<?= $welfare ?>円)</p>
                 <p>雇用保険料(会社側負担)：<?= $employment ?>円</p>
