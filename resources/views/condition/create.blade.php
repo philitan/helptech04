@@ -12,7 +12,7 @@ use App\Models\Tools;
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ route('result.index') }}" method="POST">
+                <form action="{{ route('conditions.store') }}" method="POST">
                     @csrf
                     <!-- 共通の項目 -->
                     <div id="common-fields" class="mb-6">
@@ -156,7 +156,7 @@ use App\Models\Tools;
                     </div>
 
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6">
-                        シミュレーションを実行
+                        コンディションを保存
                     </button>
                 </form>
             </div>

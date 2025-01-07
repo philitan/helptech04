@@ -150,7 +150,7 @@ use App\Models\Insurance;
         </div>
     </div>
 
-   <body>
+   <div>
         <div id="chart1"></div>
         <div id="chart2"></div>
         <script src="https://www.gstatic.com/charts/loader.js"></script>
@@ -194,6 +194,6 @@ use App\Models\Insurance;
                 chart2.draw(data2, options2);
             }
         </script>
-    </body>
+    </div>
 
 </x-app-layout>
