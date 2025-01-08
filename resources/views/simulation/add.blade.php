@@ -65,7 +65,7 @@ use App\Models\Tools;
                     <div class="flex">
                         <div>
                             <!-- 雇用形態の切り替え -->
-                            <div style="font-size: 20px; margin-left:1%;" class="text-gray-900 dark:text-gray-100">
+                            <div style="font-size: 20px; margin-left:4%;" class="text-gray-900 dark:text-gray-100">
                                 <div class="text-l font-bold"> {{("雇用形態") }}</div>
                                 <div class="flex items-center" style="margin-left: 2%;margin-top: 0.6%;">
                                     <label for="toggle1" class="relative cursor-pointer">
@@ -79,7 +79,7 @@ use App\Models\Tools;
                             <input type="hidden" name="employment-type" id="employment-type" value="fulltime">
 
                             <!-- フルタイム用 -->
-                            <div id="fulltime-fields" class="mt-4" style=" margin-left: 1%;  ">
+                            <div id="fulltime-fields" class="mt-4" style=" margin-left: 2%;  ">
                                 <div>
                                     <label for="monthly-salary" class="block text-l font-bold text-gray-700 dark:text-gray-300">月収(万円)</label>
                                     <input
@@ -87,7 +87,7 @@ use App\Models\Tools;
                                         name="monthly-salary"
                                         id="monthly-salary"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
+                                        style="width:20rem; margin-left: 6%; margin-bottom: 1%;"
                                         placeholder=""
                                         step="0.1"
                                         min="0">
@@ -99,14 +99,14 @@ use App\Models\Tools;
                                         name="commute-cost"
                                         id="commute-cost"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
+                                        style="width:20rem; margin-left: 6%; margin-bottom: 1%;"
                                         placeholder=""
                                         min="0">
                                 </div>
                             </div>
 
                             <!-- パートタイム用 -->
-                            <div id="parttime-fields" class="hidden mt-4" style=" margin-left: 1%;  ">
+                            <div id="parttime-fields" class="hidden mt-4" style=" margin-left: 2%;  ">
                                 <div>
                                     <label for="hourly-wage" class="block text-l font-bold text-gray-700 dark:text-gray-300">時給(円)</label>
                                     <input
@@ -114,7 +114,7 @@ use App\Models\Tools;
                                         name="hourly-wage"
                                         id="hourly-wage"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
+                                        style="width:20rem; margin-left: 6%; margin-bottom: 1%;"
                                         placeholder=""
                                         step="1"
                                         min="0">
@@ -126,7 +126,7 @@ use App\Models\Tools;
                                         name="hours-per-day"
                                         id="hours-per-day"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
+                                        style="width:20rem; margin-left: 6%; margin-bottom: 1%;"
                                         placeholder=""
                                         step="0.5"
                                         max="24"
@@ -139,7 +139,7 @@ use App\Models\Tools;
                                         name="days-per-week"
                                         id="days-per-week"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
+                                        style="width:20rem; margin-left: 6%; margin-bottom: 1%;"
                                         placeholder=""
                                         step="1"
                                         max="7"
@@ -152,7 +152,7 @@ use App\Models\Tools;
                                         name="transport-cost"
                                         id="transport-cost"
                                         class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
+                                        style="width:20rem; margin-left: 6%; margin-bottom: 1%;"
                                         placeholder=""
                                         step="1"
                                         min="0">
@@ -259,7 +259,7 @@ use App\Models\Tools;
                         </div>
                     </div>
                     <div class="flex">
-                        <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
+                        <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:2%;">
                             シミュレーションを実行
                         </button>
                         <a href="{{ route('simulation.index') }}" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
