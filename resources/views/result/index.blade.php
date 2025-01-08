@@ -1,5 +1,4 @@
 <?php
-
 use App\Models\Tools;
 use App\Models\Insurance;
 ?>
