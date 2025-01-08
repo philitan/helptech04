@@ -5,13 +5,13 @@ use App\Models\Tools;
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl font-bold text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('simulation') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-8 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <form action="{{ route('result.index') }}" method="POST">
                     @csrf
@@ -62,7 +62,6 @@ use App\Models\Tools;
                         </div>
 
                     </div>
-
                     <!-- 雇用形態の切り替え -->
                     <div style="font-size: 20px; margin-left:1%;" class="text-gray-900 dark:text-gray-100">
                         <div class="text-l font-bold"> {{("雇用形態") }}</div>
@@ -158,9 +157,15 @@ use App\Models\Tools;
                         </div>
                     </div>
 
-                    <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
-                        シミュレーションを実行
-                    </button>
+
+                    <div class="flex">
+                        <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
+                            シミュレーションを実行
+                        </button>
+                        <a href="{{ route('simulation.add') }}" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
+                            パターンを追加
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

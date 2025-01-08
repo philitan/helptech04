@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SimulationController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ToolsController;
+use App\Http\Controllers\ConditionsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,8 +23,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('simulation', SimulationController::class);
     Route::get('/simulation-index', [SimulationController::class, 'index'])->name('simulation.index');
+    Route::get('/simulation-index2', [SimulationController::class, 'index2'])->name('simulation.add');
     Route::get('/simulation-tools', [SimulationController::class, 'tools'])->name('simulation.tools');
-    Route::post('/result-index',[ResultController::class,'index'])->name('result.index');
+    Route::post('/result-index', [ResultController::class, 'index'])->name('result.index');
+    Route::post('/result-index2', [ResultController::class, 'index2'])->name('result.index2');
 
 
     Route::resource('tools', ToolsController::class);
@@ -32,6 +35,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/tools-store', [ToolsController::class, 'create'])->name('tools.create');
     Route::get('/tools-search', [ToolsController::class, 'search'])->name('tools.search');
     Route::delete('/tools/{tool}', [ToolsController::class, 'destroy'])->name('tools.destroy');
+
+    Route::resource('conditions', ConditionsController::class);
+    Route::get('/conditions', [ConditionsController::class, 'index'])->name('conditions.index');
+    Route::get('/conditions/search', [ConditionsController::class, 'search'])->name('conditions.search');
+    Route::get('/conditions/create', [ConditionsController::class, 'create'])->name('conditions.create');
+    Route::post('/conditions', [ConditionsController::class, 'store'])->name('conditions.store');
+
 });
 
 require __DIR__ . '/auth.php';

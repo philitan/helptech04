@@ -21,6 +21,13 @@
                     <x-nav-link :href="route('tools.index')" :active="request()->routeIs('tools.index')" class="text-white">
                         {{ __('ツール一覧') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('conditions.create')" :active="request()->routeIs('conditions.create')" class="text-white">
+                        {{ __('条件保存') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('conditions.index')" :active="request()->routeIs('conditions.index')" class="text-white">
+                        {{ __('条件一覧') }}
+                    </x-nav-link>
+                    
 
                 </div>
             </div>
@@ -83,6 +90,13 @@
             <x-responsive-nav-link :href="route('tools.index')" :active="request()->routeIs('tools.index')">
                 {{ __('tools') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('conditions.create')" :active="request()->routeIs('conditions.create')">
+                {{ __('conditions') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('conditions.index')" :active="request()->routeIs('conditions.index')">
+                {{ __('conditions') }}
+            </x-responsive-nav-link>
+            
 
         </div>
 

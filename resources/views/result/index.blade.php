@@ -4,6 +4,7 @@ use App\Models\Insurance;
 ?>
 
 <x-app-layout>
+    dd($_POST);
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('シミュレーション結果') }}
@@ -18,7 +19,7 @@ use App\Models\Insurance;
                 // 入力されたデータの取得
                 if ($_POST["employment-type"] === "fulltime") {
                     // フルタイム
-                    $monthly = $_POST["monthly-salary"] * 10000; // 月給(万円を円に直す)
+                    $monthly = $_POST["monthly-salary"] ; // 月給(万円を円に直す)
                     $traffic = $_POST["commute-cost"]; // 交通費
                 } else {
                     // パートタイム
@@ -52,11 +53,21 @@ use App\Models\Insurance;
                     if ($base < $next) {
                         break;
                     }
-                    $id++;
-                }
 
-                // 見つけ出したIDで今度はその行のみ取得
-                $insurances2 = Insurance::find($id);
+                    // 社会保険料の計算の準備
+                    $base = $monthly + $traffic; // 基準となる金額の算出
+                    $insurances = Insurance::select('salary')->get(); // 標準報酬のカラムのみ取得
+
+                    // 月給と標準報酬を比較して最適な等級(=ID)を見つけ出す
+                    $id = 0;
+                    $next = 0;
+                    foreach ($insurances as $salary) {
+                        $next = $salary->salary;
+                        if ($base < $next) {
+                            break;
+                        }
+                        $id++;
+                    }
 
                 // 雇用形態での分岐
                 if($_POST["employment-type"] === "fulltime"){
@@ -71,8 +82,8 @@ use App\Models\Insurance;
                         $health += 1;
                     }
                     $health = (int)$health;
-
                     $welfare = $insurances2->welfare;
+
                     $fraction = $welfare - (int)$welfare;
                     if ($fraction > 0) {
                         $welfare += 1;
@@ -192,4 +203,50 @@ use App\Models\Insurance;
             </div>
         </div>
     </div>
+   <div>
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            // パッケージのロード
+            google.charts.load('current', {packages: ['corechart']});
+            // ロード完了まで待機
+            google.charts.setOnLoadCallback(drawCharts);
+
+            // コールバック関数の実装
+            function drawCharts() {
+                // データの準備
+                var data1 = google.visualization.arrayToDataTable([
+                    ['number', '月収', '交通費', '社会保険', '雇用保険'],
+                    ['条件1', <?= $monthly ?>, <?= $traffic ?>, <?= $health + $welfare ?>, <?= $employment ?>],
+                ]);
+
+                var data2 = google.visualization.arrayToDataTable([
+                    ['number', '手取り'],
+                    ['条件1', <?= $income ?>],
+                ]);
+
+                // オプション設定
+                var options1 = {
+                    title: '会社負担額',
+                    seriesType: "bars",
+                    isStacked: true,
+                };
+
+                var options2 = {
+                    title: '手取り額',
+                    seriesType: "bars",
+                };
+
+                // グラフ1の描画
+                var chart1 = new google.visualization.ComboChart(document.getElementById('chart1'));
+                chart1.draw(data1, options1);
+
+                // グラフ2の描画
+                var chart2 = new google.visualization.ComboChart(document.getElementById('chart2'));
+                chart2.draw(data2, options2);
+            }
+        </script>
+    </div>
+
 </x-app-layout>

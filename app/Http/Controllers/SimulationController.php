@@ -14,7 +14,10 @@ class SimulationController extends Controller
     {
         return view('simulation.index'); //
     }
-
+    public function index2()
+    {
+        return view('simulation.add'); //
+    }
     /**
      * Show the form for creating a new resource.
      */
