@@ -12,10 +12,21 @@ use App\Models\Tools;
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ route('result.index') }}" method="POST">
+                <form action="{{ route('conditions.store') }}" method="POST">
                     @csrf
                     <!-- 共通の項目 -->
                     <div id="common-fields" class="mb-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 dark:text-gray-300">名前の入力</label>
+                            <input 
+                                type="string" 
+                                name="name" 
+                                id="name" 
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="名前を入力してください"
+                                required
+                            >
+                        </div>
                         <div>
                             <label for="equipment-cost" class="block text-gray-700 dark:text-gray-300">備品の代金(円)</label>
                             <input 
@@ -155,14 +166,9 @@ use App\Models\Tools;
                         </div>
                     </div>
 
-                    <div class="flex">
-                        <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
-                            シミュレーションを実行
-                        </button>
-                        <a href="{{ route('simulation.add') }}" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
-                            パターンを追加
-                        </a>
-                    </div>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6">
+                        コンディションを保存
+                    </button>
                 </form>
             </div>
         </div>

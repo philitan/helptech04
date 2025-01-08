@@ -16,17 +16,18 @@ use App\Models\Insurance;
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <?php
-                    // 入力されたデータの取得
-                    if ($_POST["employment-type"] === "fulltime") {
-                        // フルタイム
-                        $monthly = $_POST["monthly-salary"] * 10000; // 月給(万円を円に直す)
-                        $traffic = $_POST["commute-cost"]; // 交通費
-                    } else {
-                        // パートタイム
-                        $monthly = $_POST["hourly-wage"] * $_POST["hours-per-day"] * $_POST["days-per-week"] * 4; // 月給(1ヶ月4週間とする))
-                        $traffic = $_POST["transport-cost"] * $_POST["days-per-week"] * 4; // 1ヶ月の交通費
+                <?php
+                // 入力されたデータの取得
+                if ($_POST["employment-type"] === "fulltime") {
+                    // フルタイム
+                    $monthly = $_POST["monthly-salary"] ; // 月給(万円を円に直す)
+                    $traffic = $_POST["commute-cost"]; // 交通費
+                } else {
+                    // パートタイム
+                    $monthly = $_POST["hourly-wage"] *$_POST["hours-per-day"]* $_POST["days-per-week"]*4.33; // 月給(1ヶ月4.33週間とする))
+                    $traffic = $_POST["transport-cost"]* $_POST["days-per-week"]*4.33; // 1ヶ月の交通費
                     }
+                    
                     $age = $_POST["age"]; // 年齢
 
                     // ツール費用の計算
@@ -150,4 +151,50 @@ use App\Models\Insurance;
             </div>
         </div>
     </div>
+   <div>
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            // パッケージのロード
+            google.charts.load('current', {packages: ['corechart']});
+            // ロード完了まで待機
+            google.charts.setOnLoadCallback(drawCharts);
+
+            // コールバック関数の実装
+            function drawCharts() {
+                // データの準備
+                var data1 = google.visualization.arrayToDataTable([
+                    ['number', '月収', '交通費', '社会保険', '雇用保険'],
+                    ['条件1', <?= $monthly ?>, <?= $traffic ?>, <?= $health + $welfare ?>, <?= $employment ?>],
+                ]);
+
+                var data2 = google.visualization.arrayToDataTable([
+                    ['number', '手取り'],
+                    ['条件1', <?= $income ?>],
+                ]);
+
+                // オプション設定
+                var options1 = {
+                    title: '会社負担額',
+                    seriesType: "bars",
+                    isStacked: true,
+                };
+
+                var options2 = {
+                    title: '手取り額',
+                    seriesType: "bars",
+                };
+
+                // グラフ1の描画
+                var chart1 = new google.visualization.ComboChart(document.getElementById('chart1'));
+                chart1.draw(data1, options1);
+
+                // グラフ2の描画
+                var chart2 = new google.visualization.ComboChart(document.getElementById('chart2'));
+                chart2.draw(data2, options2);
+            }
+        </script>
+    </div>
+
 </x-app-layout>
