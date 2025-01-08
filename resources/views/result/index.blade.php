@@ -53,6 +53,7 @@ use App\Models\Insurance;
                     if ($base < $next) {
                         break;
                     }
+                }
 
                     // 社会保険料の計算の準備
                     $base = $monthly + $traffic; // 基準となる金額の算出
