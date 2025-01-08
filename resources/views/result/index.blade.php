@@ -66,22 +66,18 @@ use App\Models\Insurance;
                     } else {
                         $health = $insurances2->health;
                     }
-                    // $health2 = $health;
                     $fraction = $health - (int)$health;
                     if ($fraction > 0) {
                         $health += 1;
                     }
                     $health = (int)$health;
-                    // $health2 = (int)$health2;
 
                     $welfare = $insurances2->welfare;
-                    // $welfare2 = $welfare;
                     $fraction = $welfare - (int)$welfare;
                     if ($fraction > 0) {
                         $welfare += 1;
                     }
                     $welfare = (int)$welfare;
-                    // $welfare2 = (int)$welfare2;
 
                     // 雇用保険料の計算
                     $employment = $monthly * 0.0095;
@@ -101,22 +97,18 @@ use App\Models\Insurance;
                         } else {
                             $health = $insurances2->health;
                         }
-                        // $health2 = $health;
                         $fraction = $health - (int)$health;
                         if ($fraction > 0) {
                             $health += 1;
                         }
                         $health = (int)$health;
-                        // $health2 = (int)$health2;
 
                         $welfare = $insurances2->welfare;
-                        // $welfare2 = $welfare;
                         $fraction = $welfare - (int)$welfare;
                         if ($fraction > 0) {
                             $welfare += 1;
                         }
                         $welfare = (int)$welfare;
-                        // $welfare2 = (int)$welfare2;
 
                         // 雇用保険料の計算
                         $employment = $monthly * 0.0095;
@@ -146,17 +138,6 @@ use App\Models\Insurance;
                 // 初期費用とランニングコストを計算
                 $result = $base + $health + $welfare + $employment + $toolcost;
                 $first = $result + $_POST["equipment-cost"];
-
-                // 手取りの計算(未完成)
-                // $employment2 = $monthly*0.006;
-                // $fraction = $employment2 - (int)$employment2;
-                // if($fraction > 0.5){
-                //     $employment2 += 1;
-                // }
-                // $employment2 = (int)$employment2;
-
-                // $social = $health2 + $welfare2 + $employment2; // 控除額の計算
-                // $income = $monthly - $social; // 月給から控除額を排除
 
                 $employmentType = $_POST["employment-type"]; // 変数名を修正
             ?>
