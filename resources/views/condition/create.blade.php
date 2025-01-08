@@ -17,6 +17,17 @@ use App\Models\Tools;
                     <!-- 共通の項目 -->
                     <div id="common-fields" class="mb-6">
                         <div>
+                            <label for="name" class="block text-gray-700 dark:text-gray-300">名前の入力</label>
+                            <input 
+                                type="string" 
+                                name="name" 
+                                id="name" 
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="名前を入力してください"
+                                required
+                            >
+                        </div>
+                        <div>
                             <label for="equipment-cost" class="block text-gray-700 dark:text-gray-300">備品の代金(円)</label>
                             <input 
                                 type="number" 

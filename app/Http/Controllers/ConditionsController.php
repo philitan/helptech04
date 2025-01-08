@@ -27,6 +27,7 @@ class ConditionsController extends Controller
     {
         // バリデーション
         $validated = $request->validate([
+            'name' => 'required|string',
             'equipment-cost' => 'required|integer|min:0',
             'age' => 'required|integer|min:0',
             'tool-cost' => 'nullable|array',
