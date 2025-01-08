@@ -155,9 +155,14 @@ use App\Models\Tools;
                         </div>
                     </div>
 
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6">
-                        シミュレーションを実行
-                    </button>
+                    <div class="flex">
+                        <button type="submit" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
+                            シミュレーションを実行
+                        </button>
+                        <a href="{{ route('simulation.add') }}" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline mt-6" style="margin-bottom: 2%; margin-left:3%;">
+                            パターンを追加
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>
