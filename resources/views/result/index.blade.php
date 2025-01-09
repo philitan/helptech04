@@ -226,7 +226,7 @@ use App\Models\Insurance;
 
                 var data2 = google.visualization.arrayToDataTable([
                     ['number', '手取り'],
-                    ['条件1', <?= $income ?>],
+                    ['条件1', <?= $monthly*0.8 ?>],
                 ]);
 
                 // オプション設定
@@ -237,7 +237,7 @@ use App\Models\Insurance;
                 };
 
                 var options2 = {
-                    title: '手取り額',
+                    title: '手取り額(給与の80%と仮定)',
                     seriesType: "bars",
                 };
 
