@@ -16,30 +16,23 @@ use App\Models\Tools;
                     @csrf
                     <!-- 共通の項目 -->
                     <div id="common-fields" class="mb-6">
-                        <div>
+                        
+                       <div>
                             <label for="name" class="block text-gray-700 dark:text-gray-300">名前の入力</label>
                             <input 
-                                type="string" 
+                                type="text" 
                                 name="name" 
                                 id="name" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="名前を入力してください"
                                 required
+                                value="{{ old('name') }}"
                             >
+                            @error('name')
+                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div>
-                            <label for="equipment-cost" class="block text-gray-700 dark:text-gray-300">備品の代金(円)</label>
-                            <input 
-                                type="number" 
-                                name="equipment-cost" 
-                                id="equipment-cost" 
-                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="備品の代金を入力してください(円)"
-                                step="1"
-                                min="0"
-                                required
-                            >
-                        </div>
+
                         <div>
                             <label for="age" class="block text-gray-700 dark:text-gray-300">年齢(歳)</label>
                             <input 

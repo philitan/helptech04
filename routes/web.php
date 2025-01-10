@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/conditions/search', [ConditionsController::class, 'search'])->name('conditions.search');
     Route::get('/conditions/create', [ConditionsController::class, 'create'])->name('conditions.create');
     Route::post('/conditions', [ConditionsController::class, 'store'])->name('conditions.store');
+    Route::get('/conditions/{condition}/edit', [ConditionsController::class, 'edit'])->name('conditions.edit');
 
 });
 

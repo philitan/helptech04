@@ -15,19 +15,19 @@ class ConditionsController extends Controller
     public function index()
     {
         $conditions = Condition::all(); // ここで条件のリストを取得
-        return view('condition.index', compact('conditions'));
+        return view('conditions.index', compact('conditions'));
     }
 
     public function create()
     {
-        return view('condition.create'); //
+        return view('conditions.create'); //
     }
 
     public function store(Request $request)
     {
         // バリデーション
         $validated = $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
             'equipment-cost' => 'required|integer|min:0',
             'age' => 'required|integer|min:0',
             'tool-cost' => 'nullable|array',
@@ -41,10 +41,11 @@ class ConditionsController extends Controller
         ]);
 
         // 保存処理
-        $condition = new Condition();
+        $condition = new Condition();   
+        $condition->name = $validated['name'];     
         $condition->equipment_cost = $validated['equipment-cost'];
         $condition->age = $validated['age'];
-        $condition->tool_cost = $validated['tool-cost'] ? implode(',', $validated['tool-cost']) : null;
+        $condition->tool_cost = isset($validated['tool-cost']) ? implode(',', $validated['tool-cost']) : 0;
         $condition->employment_type = $validated['employment-type'];
 
         if ($validated['employment-type'] === 'fulltime') {
@@ -75,10 +76,27 @@ class ConditionsController extends Controller
 
         $conditions = $query->orderBy('created_at', 'desc')->get();
 
-        return view('condition.index', compact('conditions')); // $conditions を渡す
+        return view('conditions.index', compact('conditions')); // $conditions を渡す
     }
 
-    
+    public function edit(Condition $condition)
+    {
+        return view('conditions.edit', compact('condition'));
+    }
+
+    public function update(Request $request, Condition $condition)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'equipment_cost' => 'nullable|integer|min:0',
+            'employment_type' => 'required|string|in:fulltime,parttime',
+        ]);
+
+        $condition->update($validated);
+
+        return redirect()->route('conditions.index')->with('success', '条件を更新しました');
+    }
 
 
 }
