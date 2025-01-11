@@ -98,5 +98,13 @@ class ConditionsController extends Controller
         return redirect()->route('conditions.index')->with('success', '条件を更新しました');
     }
 
+    public function destroy(Condition $condition)
+    {
+        $condition->delete();
+
+        return redirect()->route('conditions.index')->with('success', '条件を消去しました');
+    }
+    
+
 
 }
