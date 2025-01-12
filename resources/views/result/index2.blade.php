@@ -238,7 +238,7 @@ use App\Models\Insurance;
                             $employment2 = (int)$employment2;
                         } else if($weektime2 >= 20 && $weektime2 < 30){
                             // 週20時間以上30時間未満の処理(雇用保険料のみ)
-                            $employment2 = $monthly * 0.0095;
+                            $employment2 = $monthly2 * 0.0095;
                             $fraction = $employment2 - (int)$employment2;
                             if ($fraction >= 0.5) {
                                 $employment2 += 1;
