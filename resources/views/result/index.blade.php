@@ -18,7 +18,7 @@ use App\Models\Insurance;
                     // 入力されたデータの取得
                     if ($_POST["employment-type"] === "fulltime") {
                         // フルタイム
-                        $monthly = $_POST["monthly-salary"] ; // 月給(万円を円に直す)
+                        $monthly = $_POST["monthly-salary"] ; // 月給
                         $traffic = $_POST["commute-cost"]; // 交通費
                     } else {
                         // パートタイム
@@ -163,7 +163,7 @@ use App\Models\Insurance;
                     <br>
 
                     <p class="text-xl font-bold">詳細情報</p>
-                    <p>月給：<?= ($monthly / 10000) ?>万円</p>
+                    <p>月給：<?= $monthly ?>円</p>
                     <p>(手取り(大体)：<?= $monthly*0.75 ?>円～<?= $monthly*0.85 ?>円)</p>
                     <p>月毎の交通費：<?= $traffic ?>円</p>
                     <br>
