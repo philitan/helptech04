@@ -15,6 +15,7 @@ use App\Models\Insurance;
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <?php
+                    // dd($_POST);
                     // 1つ目のデータ処理
 
                     // 入力されたデータの取得
@@ -54,6 +55,7 @@ use App\Models\Insurance;
                         if ($base < $next) {
                             break;
                         }
+                        $id++;
                     }
 
                     // 見つけ出したIDで今度はその行のみ取得
@@ -145,16 +147,15 @@ use App\Models\Insurance;
                     // 2つ目のデータ処理
 
                     // 入力されたデータの取得
-                    if ($_POST["employment-type2"] === "fulltime") {
+                    if ($_POST["employment-type-2"] === "fulltime") {
                         // フルタイム
-                        $monthly2 = $_POST["monthly-salary2"] ; // 月給
-                        $traffic2 = $_POST["commute-cost2"]; // 交通費
+                        $monthly2 = $_POST["monthly-salary-2"] ; // 月給
+                        $traffic2 = $_POST["commute-cost-2"]; // 交通費
                     } else {
                         // パートタイム
-                        $monthly2 = $_POST["hourly-wage2"] *$_POST["hours-per-day2"]* $_POST["days-per-week2"]*4; // 月給(1ヶ月4週間とする))
-                        $traffic2 = $_POST["transport-cost2"]* $_POST["days-per-week2"]*4; // 1ヶ月の交通費
+                        $monthly2 = $_POST["hourly-wage-2"] *$_POST["hours-per-day-2"]* $_POST["days-per-week-2"]*4; // 月給(1ヶ月4週間とする))
+                        $traffic2 = $_POST["transport-cost-2"]* $_POST["days-per-week-2"]*4; // 1ヶ月の交通費
                     }
-                    $age2 = $_POST["age2"]; // 年齢
 
                     // 社会保険料と雇用保険料の計算
 
@@ -170,15 +171,16 @@ use App\Models\Insurance;
                         if ($base < $next) {
                             break;
                         }
+                        $id++;
                     }
 
                     // 見つけ出したIDで今度はその行のみ取得
                     $insurances2 = Insurance::find($id);
 
                     // 雇用形態での分岐
-                    if($_POST["employment-type2"] === "fulltime"){
+                    if($_POST["employment-type-2"] === "fulltime"){
                         // 社会保険料の計算
-                        if ($age2 >= 40) {
+                        if ($age >= 40) {
                             $health2 = $insurances2->health_care;
                         } else {
                             $health2 = $insurances2->health;
@@ -205,11 +207,11 @@ use App\Models\Insurance;
                         $employment2 = (int)$employment2;
                     } else {
                         // 1週間に働く時間の計算
-                        $weektime2 = $_POST["hours-per-day2"]* $_POST["days-per-week2"];
+                        $weektime2 = $_POST["hours-per-day-2"]* $_POST["days-per-week-2"];
                         if($weektime2 >= 30){
                             // 週30時間以上の処理(フルタイムと同じ)
                             // 社会保険料の計算
-                            if ($age2 >= 40) {
+                            if ($age >= 40) {
                                 $health2 = $insurances2->health_care;
                             } else {
                                 $health2 = $insurances2->health;
@@ -253,10 +255,10 @@ use App\Models\Insurance;
                     }
 
                     // 初期費用とランニングコストを計算
-                    $result2 = $base2 + $health2 + $welfare2 + $employment2 + $toolcost2;
-                    $first2 = $result2 + $_POST["equipment-cost2"];
+                    $result2 = $base2 + $health2 + $welfare2 + $employment2 + $toolcost;
+                    $first2 = $result2 + $_POST["equipment-cost"];
 
-                    $employmentType2 = $_POST["employment-type2"]; // 変数名を修正
+                    $employmentType2 = $_POST["employment-type-2"]; // 変数名を修正
                     ?>
 
                     <!-- 出力 -->
@@ -327,13 +329,13 @@ use App\Models\Insurance;
                             <p>月毎の交通費：<?= $traffic2 ?>円</p>
                             <br>
 
-                            <p>備品代：<?= $_POST["equipment-cost2"] ?>円</p>
-                            <p>月毎のツール代：<?= $toolcost2 ?>円</p>
+                            <p>備品代：<?= $_POST["equipment-cost"] ?>円</p>
+                            <p>月毎のツール代：<?= $toolcost ?>円</p>
                             <p>(使用ツール：
                             <?php
-                            if(isset($_POST["tool-cost2"])){
-                                foreach($_POST["tool-cost2"] as $key => $value){
-                                    if($key+1 == count($_POST["tool-cost2"])){
+                            if(isset($_POST["tool-cost"])){
+                                foreach($_POST["tool-cost"] as $key => $value){
+                                    if($key+1 == count($_POST["tool-cost"])){
                                         echo $value;
                                     } else {
                                         echo $value.", ";
@@ -346,17 +348,17 @@ use App\Models\Insurance;
                             )</p>
                             <br>
 
-                            <p>年齢：<?= $age2 ?>歳</p>
-                            <p>(介護保険の支払い：<?= $age2 >= 40 ? "あり" : "なし" ?>)</p>
+                            <p>年齢：<?= $age ?>歳</p>
+                            <p>(介護保険の支払い：<?= $age >= 40 ? "あり" : "なし" ?>)</p>
                             <?php
-                            if($_POST["employment-type2"] === "parttime"){
+                            if($_POST["employment-type-2"] === "parttime"){
                                 echo "1週間で働く時間：".$weektime2."時間<br>";
                             }
                             ?>
                             <br>
 
                             <p>社会保険料(会社側負担)：<?= $health2 + $welfare2 ?>円</p>
-                            <p>(<?= $age2 >= 40 ? "健康保険+介護保険" : "健康保険" ?>：<?= $health2 ?>円、厚生年金：<?= $welfare2 ?>円)</p>
+                            <p>(<?= $age >= 40 ? "健康保険+介護保険" : "健康保険" ?>：<?= $health2 ?>円、厚生年金：<?= $welfare2 ?>円)</p>
                             <p>雇用保険料(会社側負担)：<?= $employment2 ?>円</p>
                         </div>
                     </div>

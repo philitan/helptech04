@@ -52,6 +52,7 @@ use App\Models\Insurance;
                         if ($base < $next) {
                             break;
                         }
+                        $id++;
                     }
 
                     // 見つけ出したIDで今度はその行のみ取得
