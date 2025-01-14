@@ -14,7 +14,7 @@ class ConditionsController extends Controller
      */
     public function index()
     {
-        $conditions = Condition::all(); // ここで条件のリストを取得
+        $conditions = Condition::orderBy('created_at', 'desc')->paginate(10);
         return view('conditions.index', compact('conditions'));
     }
 
