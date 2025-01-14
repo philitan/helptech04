@@ -66,18 +66,18 @@ class ConditionsController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-        $query = Condition::query();
 
         if (!empty($keyword)) {
-            $query->where('name', 'like', '%' . $keyword . '%')
-                ->orWhere('employment_type', 'like', '%' . $keyword . '%')
-                ->orWhere('equipment_cost', 'like', '%' . $keyword . '%');
+            $conditions = Condition::where('name', 'LIKE', "%{$keyword}%")
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $conditions = Condition::orderBy('created_at', 'desc')->paginate(10);
         }
 
-        $conditions = $query->orderBy('created_at', 'desc')->get();
-
-        return view('conditions.index', compact('conditions')); // $conditions を渡す
+        return view('conditions.index', compact('conditions'));
     }
+
 
     public function edit(Condition $condition)
     {
@@ -104,7 +104,9 @@ class ConditionsController extends Controller
 
         return redirect()->route('conditions.index')->with('success', '条件を消去しました');
     }
-    
 
-
+    public function show(Condition $condition)
+    {
+        return view('conditions.index', compact('condition'));
+    }
 }
