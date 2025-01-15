@@ -151,7 +151,7 @@ use App\Models\Insurance;
 
                     <p class="text-xl font-bold">詳細情報</p>
                     <h4 class="text-l font-semibold text-gray-800 dark:text-gray-200" style="margin-top: 1%;">雇用形態: {{ $employmentType === 'fulltime' ? 'フルタイム' : 'パートタイム' }}</h4>
-                    <p>月給：<?= ($monthly / 10000) ?>万円</p>
+                    <p>月給：<?= $monthly ?>円</p>
                     <p>(手取り(大体)：<?= $monthly * 0.75 ?>円～<?= $monthly * 0.85 ?>円)</p>
                     <p>月毎の交通費：<?= $traffic ?>円</p>
                     <br>
