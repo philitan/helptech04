@@ -57,5 +57,8 @@
         </div>
         @endforeach
     </div>
+    <div>
+        {{ $tools->links() }}
+    </div>
 
 </x-app-layout>
