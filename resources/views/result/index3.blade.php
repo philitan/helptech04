@@ -20,6 +20,7 @@ use App\Models\Insurance;
                     // 初期費用とランニングコストを計算
                     $result = $base + $health + $welfare + $employment + $toolcost;
                     $first = $result + $_POST["equipment-cost"];
+                    $weektime = $_POST["hours-per-day"]* $_POST["days-per-week"]*4.33;
 
                     $employmentType = $_POST["employment-type"]; // 変数名を修正
                     ?>

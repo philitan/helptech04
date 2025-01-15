@@ -102,7 +102,7 @@
                                     <input type="hidden" name="tool_cost" value="{{ is_array($condition->tool_cost) ? implode(', ', $condition->tool_cost) : $condition->tool_cost }}">
                                     <input type="hidden" name="employment-type" value="{{ $condition->employment_type }}" required>
                                     <input type="hidden" name="monthly-salary" value="{{ $condition->monthly_salary ?? '' }}">
-                                    <input type="hidden" name="commute-cost" value="{{ $condition->commute_cost ?? '' }}">
+                                    <input type="hidden" name="commute-cost" value="{{ $condition->commute_cost ?? '' }}"> 
                                     <input type="hidden" name="hourly-wage" value="{{ $condition->hourly_wage ?? '' }}">
                                     <input type="hidden" name="hours-per-day" value="{{ $condition->hours_per_day ?? '' }}">
                                     <input type="hidden" name="days-per-week" value="{{ $condition->days_per_week ?? '' }}">
