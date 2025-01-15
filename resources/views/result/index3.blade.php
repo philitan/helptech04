@@ -20,7 +20,12 @@ use App\Models\Insurance;
                     // 初期費用とランニングコストを計算
                     $result = $base + $health + $welfare + $employment + $toolcost;
                     $first = $result + $_POST["equipment-cost"];
-                    $weektime = $_POST["hours-per-day"]* $_POST["days-per-week"];
+                    // hours-per-day と days-per-week が正しい数値であることを確認する
+                    $hoursPerDay = isset($_POST["hours-per-day"]) && is_numeric($_POST["hours-per-day"]) ? intval($_POST["hours-per-day"]) : 0;
+                    $daysPerWeek = isset($_POST["days-per-week"]) && is_numeric($_POST["days-per-week"]) ? intval($_POST["days-per-week"]) : 0;
+
+                    // weektime を計算
+                    $weektime = $hoursPerDay * $daysPerWeek;
 
                     $employmentType = $_POST["employment-type"]; // 変数名を修正
                     ?>
