@@ -14,7 +14,7 @@ class ConditionsController extends Controller
      */
     public function index()
     {
-        $conditions = Condition::orderBy('created_at', 'desc')->paginate(10);
+        $conditions = Condition::orderBy('created_at', 'desc')->paginate(3);
         return view('conditions.index', compact('conditions'));
     }
 
@@ -24,7 +24,10 @@ class ConditionsController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
+        // 入力データ確認
+        //dd($request->all());
+
         // バリデーション
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -40,12 +43,15 @@ class ConditionsController extends Controller
             'transport-cost' => 'nullable|numeric|min:0',
         ]);
 
+        // バリデーション確認
+        //dd($validated);
+        
         // 保存処理
         $condition = new Condition();   
         $condition->name = $validated['name'];     
         $condition->equipment_cost = $validated['equipment-cost'];
         $condition->age = $validated['age'];
-        $condition->tool_cost = isset($validated['tool-cost']) ? implode(',', $validated['tool-cost']) : 0;
+        $condition->tool_cost = isset($validated['tool-cost']) ? implode(',', $validated['tool-cost']) : null;
         $condition->employment_type = $validated['employment-type'];
 
         if ($validated['employment-type'] === 'fulltime') {
@@ -58,10 +64,18 @@ class ConditionsController extends Controller
             $condition->transport_cost = $validated['transport-cost'];
         }
 
+        // 保存前のデータ確認
+        //dd($condition);
+
+        // 保存
         $condition->save();
+
+        // 保存確認
+        //dd($condition->id);
 
         return redirect()->back()->with('success', 'データを保存しました');
     }
+
 
     public function search(Request $request)
     {

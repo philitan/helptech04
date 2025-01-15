@@ -46,6 +46,18 @@ use App\Models\Tools;
                                 required
                             >
                         </div>
+                        <div>
+                            <label for="equipment-cost" class="block text-gray-700 dark:text-gray-300">初期費用</label>
+                            <input 
+                                type="number" 
+                                name="equipment-cost" 
+                                id="equipment-cost" 
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="初期費用を入力してください"
+                                min="0"
+                                required
+                            >
+                        </div>
                         
                         <!-- チェックboxの処理 -->
                         <div>

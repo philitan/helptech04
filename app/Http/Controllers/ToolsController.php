@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Simulation;
 use App\Models\Tools;
+use App\Models\Insurance;
 use Illuminate\Http\Request;
 
 class ToolsController extends Controller
