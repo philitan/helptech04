@@ -100,17 +100,27 @@ class ConditionsController extends Controller
 
     public function update(Request $request, Condition $condition)
     {
+        // バリデーション
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
             'equipment_cost' => 'nullable|integer|min:0',
             'employment_type' => 'required|string|in:fulltime,parttime',
+            'tool_cost' => 'nullable|array', // 配列として受け取る
+            'tool_cost.*' => 'string|max:255', // 各ツール名が文字列であることを確認
         ]);
 
+        // tool_costが配列の場合、カンマ区切りの文字列に変換
+        if (isset($validated['tool_cost'])) {
+            $validated['tool_cost'] = implode(',', $validated['tool_cost']);
+        }
+
+        // 更新処理
         $condition->update($validated);
 
         return redirect()->route('conditions.index')->with('success', '条件を更新しました');
     }
+
 
     public function destroy(Condition $condition)
     {

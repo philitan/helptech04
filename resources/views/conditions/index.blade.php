@@ -73,7 +73,7 @@
                                         交通費: ¥{{ $condition->transport_cost }}
                                     </p>
                                     <p class="text-gray-800 dark:text-gray-300 text-lg font-bold text-center mb-2">
-                                        使用ツール:{{ $condition->tool_cost}}
+                                        使用ツール: {{ $condition->tool_cost }}
                                     </p>
                                 @endif
 
@@ -94,11 +94,12 @@
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $condition->id }}">
                                     <input type="hidden" name="name" value="{{ $condition->name }}">
+                                
 
                                     <!-- その他のフォームフィールド -->
                                     <input type="hidden" name="equipment-cost" value="{{ $condition->equipment_cost }}" required>
                                     <input type="hidden" name="age" value="{{ $condition->age }}" required>
-                                    <input type="hidden" name="tool_cost" value="{{ is_array($condition->tool_cost) ? implode(',', $condition->tool_cost) : '' }}">
+                                    <input type="hidden" name="tool_cost" value="{{ is_array($condition->tool_cost) ? implode(', ', $condition->tool_cost) : $condition->tool_cost }}">
                                     <input type="hidden" name="employment-type" value="{{ $condition->employment_type }}" required>
                                     <input type="hidden" name="monthly-salary" value="{{ $condition->monthly_salary ?? '' }}">
                                     <input type="hidden" name="commute-cost" value="{{ $condition->commute_cost ?? '' }}">
