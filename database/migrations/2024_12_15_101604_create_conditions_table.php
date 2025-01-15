@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('conditions_table', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->integer('equipment_cost');
             $table->integer('age');
-            $table->string('tool_cost')->nullable();
+            $table->text('tool_cost')->nullable();
             $table->string('employment_type');
             $table->decimal('monthly_salary', 10, 2)->nullable();
             $table->decimal('commute_cost', 10, 2)->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->decimal('transport_cost', 10, 2)->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

@@ -14,20 +14,23 @@ class ConditionsController extends Controller
      */
     public function index()
     {
-        $conditions = Condition::all(); // ここで条件のリストを取得
-        return view('condition.index', compact('conditions'));
+        $conditions = Condition::orderBy('created_at', 'desc')->paginate(3);
+        return view('conditions.index', compact('conditions'));
     }
 
     public function create()
     {
-        return view('condition.create'); //
+        return view('conditions.create'); //
     }
 
     public function store(Request $request)
-    {
+    {   
+        // 入力データ確認
+        //dd($request->all());
+
         // バリデーション
         $validated = $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
             'equipment-cost' => 'required|integer|min:0',
             'age' => 'required|integer|min:0',
             'tool-cost' => 'nullable|array',
@@ -40,11 +43,15 @@ class ConditionsController extends Controller
             'transport-cost' => 'nullable|numeric|min:0',
         ]);
 
+        // バリデーション確認
+        //dd($validated);
+        
         // 保存処理
-        $condition = new Condition();
+        $condition = new Condition();   
+        $condition->name = $validated['name'];     
         $condition->equipment_cost = $validated['equipment-cost'];
         $condition->age = $validated['age'];
-        $condition->tool_cost = $validated['tool-cost'] ? implode(',', $validated['tool-cost']) : null;
+        $condition->tool_cost = isset($validated['tool-cost']) ? implode(',', $validated['tool-cost']) : null;
         $condition->employment_type = $validated['employment-type'];
 
         if ($validated['employment-type'] === 'fulltime') {
@@ -57,28 +64,63 @@ class ConditionsController extends Controller
             $condition->transport_cost = $validated['transport-cost'];
         }
 
+        // 保存前のデータ確認
+        //dd($condition);
+
+        // 保存
         $condition->save();
+
+        // 保存確認
+        //dd($condition->id);
 
         return redirect()->back()->with('success', 'データを保存しました');
     }
 
+
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-        $query = Condition::query();
 
         if (!empty($keyword)) {
-            $query->where('name', 'like', '%' . $keyword . '%')
-                ->orWhere('employment_type', 'like', '%' . $keyword . '%')
-                ->orWhere('equipment_cost', 'like', '%' . $keyword . '%');
+            $conditions = Condition::where('name', 'LIKE', "%{$keyword}%")
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $conditions = Condition::orderBy('created_at', 'desc')->paginate(10);
         }
 
-        $conditions = $query->orderBy('created_at', 'desc')->get();
-
-        return view('condition.index', compact('conditions')); // $conditions を渡す
+        return view('conditions.index', compact('conditions'));
     }
 
-    
 
+    public function edit(Condition $condition)
+    {
+        return view('conditions.edit', compact('condition'));
+    }
 
+    public function update(Request $request, Condition $condition)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'equipment_cost' => 'nullable|integer|min:0',
+            'employment_type' => 'required|string|in:fulltime,parttime',
+        ]);
+
+        $condition->update($validated);
+
+        return redirect()->route('conditions.index')->with('success', '条件を更新しました');
+    }
+
+    public function destroy(Condition $condition)
+    {
+        $condition->delete();
+
+        return redirect()->route('conditions.index')->with('success', '条件を消去しました');
+    }
+
+    public function show(Condition $condition)
+    {
+        return view('conditions.index', compact('condition'));
+    }
 }

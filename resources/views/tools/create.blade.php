@@ -18,7 +18,8 @@
                             <label for="tool_name" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">ツール名</label>
                             <input type="text" name="tool_name" id="tool_name"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="ツール名を入力">
+                                placeholder="ツール名を入力"
+                                required>
                             @error('tool_name')
                             <span class="text-red-500 text-xs italic">{{ $tools->name }}</span>
                             @enderror
@@ -29,7 +30,8 @@
                             <label for="price" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">値段</label>
                             <input type="number" name="price" id="price" step="0.01"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="値段を入力">
+                                placeholder="値段を入力"
+                                required>
                             @error('price')
                             <span class="text-red-500 text-xs italic">{{ $tools->price }}</span>
                             @enderror

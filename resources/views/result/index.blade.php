@@ -16,6 +16,7 @@ use App\Models\Insurance;
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <?php
+                    
                     // 入力されたデータの取得
                     if ($_POST["employment-type"] === "fulltime") {
                         // フルタイム
@@ -23,11 +24,11 @@ use App\Models\Insurance;
                         $traffic = $_POST["commute-cost"]; // 交通費
                     } else {
                         // パートタイム
-                        $monthly = $_POST["hourly-wage"] * $_POST["hours-per-day"] * $_POST["days-per-week"] * 4; // 月給(1ヶ月4週間とする))
-                        $traffic = $_POST["transport-cost"] * $_POST["days-per-week"] * 4; // 1ヶ月の交通費
+                        $monthly = $_POST["hourly-wage"] *$_POST["hours-per-day"]* $_POST["days-per-week"]*4.33; // 月給(1ヶ月4週間とする))
+                        $traffic = $_POST["transport-cost"]* $_POST["days-per-week"]*4.33; // 1ヶ月の交通費
                     }
                     $age = $_POST["age"]; // 年齢
-
+                    
                     // ツール費用の計算
                     $toolcost = 0;
                     if (isset($_POST["tool-cost"])) {
