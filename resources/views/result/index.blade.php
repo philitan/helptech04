@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Tools;
 use App\Models\Insurance;
 ?>
@@ -19,7 +20,7 @@ use App\Models\Insurance;
                     // 入力されたデータの取得
                     if ($_POST["employment-type"] === "fulltime") {
                         // フルタイム
-                        $monthly = $_POST["monthly-salary"] ; // 月給(万円を円に直す)
+                        $monthly = $_POST["monthly-salary"]; // 月給(万円を円に直す)
                         $traffic = $_POST["commute-cost"]; // 交通費
                     } else {
                         // パートタイム
@@ -30,14 +31,14 @@ use App\Models\Insurance;
                     
                     // ツール費用の計算
                     $toolcost = 0;
-                    if(isset($_POST["tool-cost"])){
-                    foreach ($_POST["tool-cost"] as $key => $value) {
-                        $tools = Tools::where('name', '=', $value)->get();
-                        foreach ($tools as $tool) {
-                            $price = $tool->price;
-                            $toolcost += $price;
+                    if (isset($_POST["tool-cost"])) {
+                        foreach ($_POST["tool-cost"] as $key => $value) {
+                            $tools = Tools::where('name', '=', $value)->get();
+                            foreach ($tools as $tool) {
+                                $price = $tool->price;
+                                $toolcost += $price;
+                            }
                         }
-                    }
                     }
                     // 社会保険料と雇用保険料の計算
 
@@ -55,26 +56,26 @@ use App\Models\Insurance;
                         }
                     }
 
-                        // 社会保険料の計算の準備
-                        $base = $monthly + $traffic; // 基準となる金額の算出
-                        $insurances = Insurance::select('salary')->get(); // 標準報酬のカラムのみ取得
+                    // 社会保険料の計算の準備
+                    $base = $monthly + $traffic; // 基準となる金額の算出
+                    $insurances = Insurance::select('salary')->get(); // 標準報酬のカラムのみ取得
 
-                        // 月給と標準報酬を比較して最適な等級(=ID)を見つけ出す
-                        $id = 0;
-                        $next = 0;
-                        foreach ($insurances as $salary) {
-                            $next = $salary->salary;
-                            if ($base < $next) {
-                                break;
-                            }
-                            $id++;
+                    // 月給と標準報酬を比較して最適な等級(=ID)を見つけ出す
+                    $id = 0;
+                    $next = 0;
+                    foreach ($insurances as $salary) {
+                        $next = $salary->salary;
+                        if ($base < $next) {
+                            break;
                         }
+                        $id++;
+                    }
 
-                        // 見つけ出したIDで今度はその行のみ取得
-                        $insurances2 = Insurance::find($id);
+                    // 見つけ出したIDで今度はその行のみ取得
+                    $insurances2 = Insurance::find($id);
 
                     // 雇用形態での分岐
-                    if($_POST["employment-type"] === "fulltime"){
+                    if ($_POST["employment-type"] === "fulltime") {
                         // 社会保険料の計算
                         if ($age >= 40) {
                             $health = $insurances2->health_care;
@@ -103,8 +104,8 @@ use App\Models\Insurance;
                         $employment = (int)$employment;
                     } else {
                         // 1週間に働く時間の計算
-                        $weektime = $_POST["hours-per-day"]* $_POST["days-per-week"];
-                        if($weektime >= 30){
+                        $weektime = $_POST["hours-per-day"] * $_POST["days-per-week"];
+                        if ($weektime >= 30) {
                             // 週30時間以上の処理(フルタイムと同じ)
                             // 社会保険料の計算
                             if ($age >= 40) {
@@ -132,7 +133,7 @@ use App\Models\Insurance;
                                 $employment += 1;
                             }
                             $employment = (int)$employment;
-                        } else if($weektime >= 20 && $weektime < 30){
+                        } else if ($weektime >= 20 && $weektime < 30) {
                             // 週20時間以上30時間未満の処理(雇用保険料のみ)
                             $employment = $monthly * 0.0095;
                             $fraction = $employment - (int)$employment;
@@ -164,35 +165,36 @@ use App\Models\Insurance;
                     <br>
 
                     <p class="text-xl font-bold">詳細情報</p>
+                    <h4 class="text-l font-semibold text-gray-800 dark:text-gray-200" style="margin-top: 1%;">雇用形態: {{ $employmentType === 'fulltime' ? 'フルタイム' : 'パートタイム' }}</h4>
                     <p>月給：<?= ($monthly / 10000) ?>万円</p>
-                    <p>(手取り(大体)：<?= $monthly*0.75 ?>円～<?= $monthly*0.85 ?>円)</p>
+                    <p>(手取り(大体)：<?= $monthly * 0.75 ?>円～<?= $monthly * 0.85 ?>円)</p>
                     <p>月毎の交通費：<?= $traffic ?>円</p>
                     <br>
 
                     <p>備品代：<?= $_POST["equipment-cost"] ?>円</p>
                     <p>月毎のツール代：<?= $toolcost ?>円</p>
                     <p>(使用ツール：
-                    <?php
-                    if(isset($_POST["tool-cost"])){
-                        foreach($_POST["tool-cost"] as $key => $value){
-                            if($key+1 == count($_POST["tool-cost"])){
-                                echo $value;
-                            } else {
-                                echo $value.", ";
+                        <?php
+                        if (isset($_POST["tool-cost"])) {
+                            foreach ($_POST["tool-cost"] as $key => $value) {
+                                if ($key + 1 == count($_POST["tool-cost"])) {
+                                    echo $value;
+                                } else {
+                                    echo $value . ", ";
+                                }
                             }
+                        } else {
+                            echo "なし";
                         }
-                    } else {
-                        echo "なし";
-                    }
-                    ?>
-                    )</p>
+                        ?>
+                        )</p>
                     <br>
 
                     <p>年齢：<?= $age ?>歳</p>
                     <p>(介護保険の支払い：<?= $age >= 40 ? "あり" : "なし" ?>)</p>
                     <?php
-                    if($_POST["employment-type"] === "parttime"){
-                        echo "1週間で働く時間：".$weektime."時間<br>";
+                    if ($_POST["employment-type"] === "parttime") {
+                        echo "1週間で働く時間：" . $weektime . "時間<br>";
                     }
                     ?>
                     <br>
@@ -201,9 +203,7 @@ use App\Models\Insurance;
                     <p>(<?= $age >= 40 ? "健康保険+介護保険" : "健康保険" ?>：<?= $health ?>円、厚生年金：<?= $welfare ?>円)</p>
                     <p>雇用保険料(会社側負担)：<?= $employment ?>円</p>
                 </div>
-                <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200" style="margin-left: 2%;">雇用形態: {{ $employmentType === 'fulltime' ? 'フルタイム' : 'パートタイム' }}</h3>
-                </div>
+
             </div>
         </div>
     </div>
@@ -213,7 +213,9 @@ use App\Models\Insurance;
         <script src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             // パッケージのロード
-            google.charts.load('current', {packages: ['corechart']});
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
             // ロード完了まで待機
             google.charts.setOnLoadCallback(drawCharts);
 
@@ -227,7 +229,7 @@ use App\Models\Insurance;
 
                 var data2 = google.visualization.arrayToDataTable([
                     ['number', '手取り'],
-                    ['条件1', <?= $monthly*0.8 ?>],
+                    ['条件1', <?= $monthly * 0.8 ?>],
                 ]);
 
                 // オプション設定
