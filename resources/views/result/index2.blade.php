@@ -20,7 +20,7 @@ use App\Models\Insurance;
                         // 入力されたデータの取得
                         if ($_POST["employment-type"] === "fulltime") {
                             // フルタイム
-                            $monthly = $_POST["monthly-salary"] * 10000; // 月給(万円を円に直す)
+                            $monthly = $_POST["monthly-salary"];
                             $traffic = $_POST["commute-cost"]; // 交通費
                         } else {
                             // パートタイム
@@ -112,7 +112,7 @@ use App\Models\Insurance;
                         // 入力されたデータの取得
                         if ($_POST["employment-type-2"] === "fulltime") {
                             // フルタイム
-                            $monthly2 = $_POST["monthly-salary-2"] * 10000; // 月給(万円を円に直す)
+                            $monthly2 = $_POST["monthly-salary-2"];
                             $traffic2 = $_POST["commute-cost-2"]; // 交通費
                         } else {
                             // パートタイム
@@ -278,5 +278,54 @@ use App\Models\Insurance;
 
             </div>
         </div>
+    </div>
+    <div>
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            // パッケージのロード
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
+            // ロード完了まで待機
+            google.charts.setOnLoadCallback(drawCharts);
+
+            // コールバック関数の実装
+            function drawCharts() {
+                // データの準備
+                var data1 = google.visualization.arrayToDataTable([
+                    ['number', '月収', '交通費', '社会保険', '雇用保険'],
+                    ['条件1', <?= $monthly ?>, <?= $traffic ?>, <?= $health + $welfare ?>, <?= $employment ?>],
+                    ['条件2', <?= $monthly2 ?>, <?= $traffic2 ?>, <?= $health3 + $welfare3 ?>, <?= $employment ?>],
+                ]);
+
+                var data2 = google.visualization.arrayToDataTable([
+                    ['number', '手取り'],
+                    ['条件1', <?= $monthly * 0.8 ?>],
+                    ['条件2', <?= $monthly2 * 0.8 ?>],
+                ]);
+
+                // オプション設定
+                var options1 = {
+                    title: '会社負担額',
+                    seriesType: "bars",
+                    isStacked: true,
+                };
+
+                var options2 = {
+                    title: '手取り額(給与の80%と仮定)',
+                    seriesType: "bars",
+                };
+
+                // グラフ1の描画
+                var chart1 = new google.visualization.ComboChart(document.getElementById('chart1'));
+                chart1.draw(data1, options1);
+
+                // グラフ2の描画
+                var chart2 = new google.visualization.ComboChart(document.getElementById('chart2'));
+                chart2.draw(data2, options2);
+            }
+        </script>
     </div>
 </x-app-layout>
