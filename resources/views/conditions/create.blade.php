@@ -98,6 +98,7 @@ use App\Models\Tools;
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 step="1"
                                 min="0"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -109,6 +110,7 @@ use App\Models\Tools;
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 min="0"
                                 step = "1"
+                                required
                             >
                         </div>
                     </div>
@@ -124,6 +126,7 @@ use App\Models\Tools;
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 step="1"
                                 min="0"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -136,6 +139,7 @@ use App\Models\Tools;
                                 step="0.5"
                                 max="24"
                                 min="0"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -148,6 +152,7 @@ use App\Models\Tools;
                                 step="1"
                                 max="7"
                                 min="1"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -159,6 +164,7 @@ use App\Models\Tools;
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 step="1"
                                 min="0"
+                                required
                             >
                         </div>
                     </div>
