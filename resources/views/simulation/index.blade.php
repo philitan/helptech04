@@ -1,5 +1,4 @@
 <?php
-
 use App\Models\Tools;
 ?>
 
@@ -99,6 +98,7 @@ use App\Models\Tools;
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 style="width:20rem; margin-left: 2%; margin-bottom: 1%;"
                                 placeholder=""
+                                step="1"
                                 min="0">
                         </div>
                     </div>

@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/simulation-tools', [SimulationController::class, 'tools'])->name('simulation.tools');
     Route::post('/result-index', [ResultController::class, 'index'])->name('result.index');
     Route::post('/result-index2', [ResultController::class, 'index2'])->name('result.index2');
-
+    Route::post('/result-index3', [ResultController::class, 'index3'])->name('result.index3');
 
     Route::resource('tools', ToolsController::class);
     Route::get('/tools-index', [ToolsController::class, 'index'])->name('tools.index');
@@ -38,9 +38,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('conditions', ConditionsController::class);
     Route::get('/conditions', [ConditionsController::class, 'index'])->name('conditions.index');
-    Route::get('/conditions/search', [ConditionsController::class, 'search'])->name('conditions.search');
     Route::get('/conditions/create', [ConditionsController::class, 'create'])->name('conditions.create');
-    Route::post('/conditions', [ConditionsController::class, 'store'])->name('conditions.store');
+    Route::post('/conditions/store', [ConditionsController::class, 'store'])->name('conditions.store');
+    Route::get('/conditions-search', [ConditionsController::class, 'search'])->name('conditions.search');
+    Route::get('/conditions/{condition}/edit', [ConditionsController::class, 'edit'])->name('conditions.edit');
+    Route::get('/conditions/{condition}/show', [ConditionsController::class, 'show'])->name('conditions.show');
+
 
 });
 

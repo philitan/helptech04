@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Simulation;
 use App\Models\Tools;
+use App\Models\Insurance;
 use Illuminate\Http\Request;
 
 class ToolsController extends Controller
@@ -14,7 +15,7 @@ class ToolsController extends Controller
 
     public function index(Tools $tools)
     {
-        $tools = Tools::all();
+        $tools = Tools::paginate(5);
         return view('tools.index', compact('tools'));
     }
 

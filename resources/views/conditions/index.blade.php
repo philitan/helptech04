@@ -15,7 +15,7 @@
             <div class="flex items-center justify-center">
                 <input type="text" name="keyword"
                     class="shadow appearance-none border rounded py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    style="width: 80%;"
+                    style="width: 80rem; margin-left:3%; "
                     placeholder="条件を検索..."
                     value="{{ request('keyword') }}">
                 <button type="submit" class="ml-4 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800">
@@ -55,6 +55,9 @@
                                     <p class="text-gray-800 dark:text-gray-300 text-lg font-bold text-center mb-2">
                                         通勤費: ¥{{ $condition->commute_cost }}
                                     </p>
+                                    <p class="text-gray-800 dark:text-gray-300 text-lg font-bold text-center mb-2">
+                                        使用ツール:{{ $condition->tool_cost}}
+                                    </p>
                                 @else
                                     <!-- Parttimeの場合 -->
                                     <p class="text-gray-800 dark:text-gray-300 text-lg font-bold text-center mb-2">
@@ -68,6 +71,9 @@
                                     </p>
                                     <p class="text-gray-800 dark:text-gray-300 text-lg font-bold text-center mb-2">
                                         交通費: ¥{{ $condition->transport_cost }}
+                                    </p>
+                                    <p class="text-gray-800 dark:text-gray-300 text-lg font-bold text-center mb-2">
+                                        使用ツール: {{ $condition->tool_cost }}
                                     </p>
                                 @endif
 
@@ -84,6 +90,28 @@
                                         削除
                                     </button>
                                 </form>
+                                <form action="{{ route('result.index3') }}" method="POST" onsubmit="return confirm('シミュレーションを実行しますか？');" class="text-center">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $condition->id }}">
+                                    <input type="hidden" name="name" value="{{ $condition->name }}">
+                                
+
+                                    <!-- その他のフォームフィールド -->
+                                    <input type="hidden" name="equipment-cost" value="{{ $condition->equipment_cost }}" required>
+                                    <input type="hidden" name="age" value="{{ $condition->age }}" required>
+                                    <input type="hidden" name="tool_cost" value="{{ is_array($condition->tool_cost) ? implode(', ', $condition->tool_cost) : $condition->tool_cost }}">
+                                    <input type="hidden" name="employment-type" value="{{ $condition->employment_type }}" required>
+                                    <input type="hidden" name="monthly-salary" value="{{ $condition->monthly_salary ?? '' }}">
+                                    <input type="hidden" name="commute-cost" value="{{ $condition->commute_cost ?? '' }}"> 
+                                    <input type="hidden" name="hourly-wage" value="{{ $condition->hourly_wage ?? '' }}">
+                                    <input type="hidden" name="hours-per-day" value="{{ $condition->hours_per_day ?? '' }}">
+                                    <input type="hidden" name="days-per-week" value="{{ $condition->days_per_week ?? '' }}">
+                                    <input type="hidden" name="transport-cost" value="{{ $condition->transport_cost ?? '' }}">
+
+                                    <button type="submit" class="text-gray-500 hover:text-black-700">
+                                        シミュレーションの実行
+                                    </button>
+                                </form>                               
                             </div>
                         </div>
                     </div>
@@ -91,5 +119,8 @@
             </div>
         @endif
 
+    </div>
+    <div>
+        {{ $conditions->links() }}
     </div>
 </x-app-layout>

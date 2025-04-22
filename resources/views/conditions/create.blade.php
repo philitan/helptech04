@@ -5,7 +5,7 @@ use App\Models\Tools;
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('simulation') }}
+            {{ __('条件保存') }}
         </h2>
     </x-slot>
 
@@ -15,40 +15,42 @@ use App\Models\Tools;
                 <form action="{{ route('conditions.store') }}" method="POST">
                     @csrf
                     <!-- 共通の項目 -->
-                    <div id="common-fields" class="mb-6">
-                        <div>
-                            <label for="name" class="block text-gray-700 dark:text-gray-300">名前の入力</label>
+                    <div id="common-fields" class="mb-6" style="margin-top: 2%; margin-left:1%;">
+                        
+                       <div style="margin-bottom: 2%;">
+                            <label for="name" class="block text-l font-bold text-gray-700 dark:text-gray-300">名前の入力</label>
                             <input 
-                                type="string" 
+                                type="text" 
                                 name="name" 
                                 id="name" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="名前を入力してください"
                                 required
+                                value="{{ old('name') }}"
                             >
+                            @error('name')
+                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div>
-                            <label for="equipment-cost" class="block text-gray-700 dark:text-gray-300">備品の代金(円)</label>
-                            <input 
-                                type="number" 
-                                name="equipment-cost" 
-                                id="equipment-cost" 
-                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="備品の代金を入力してください(円)"
-                                step="1"
-                                min="0"
-                                required
-                            >
-                        </div>
-                        <div>
-                            <label for="age" class="block text-gray-700 dark:text-gray-300">年齢(歳)</label>
+
+                        <div style="margin-bottom: 2%;">
+                            <label for="age" class="block text-l font-bold text-gray-700 dark:text-gray-300">年齢(歳)</label>
                             <input 
                                 type="number" 
                                 name="age" 
                                 id="age" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="年齢を入力してください(歳)"
                                 step="1"
+                                min="0"
+                                required
+                            >
+                        </div>
+                        <div style="margin-bottom: 2%;">
+                            <label for="equipment-cost" class="block text-l font-bold text-gray-700 dark:text-gray-300">初期費用 (円)</label>
+                            <input 
+                                type="number" 
+                                name="equipment-cost" 
+                                id="equipment-cost" 
+                                class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 min="0"
                                 required
                             >
@@ -94,9 +96,9 @@ use App\Models\Tools;
                                 name="monthly-salary" 
                                 id="monthly-salary" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="月収を入力してください(万円)"
-                                step="0.1"
+                                step="1"
                                 min="0"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -106,8 +108,9 @@ use App\Models\Tools;
                                 name="commute-cost" 
                                 id="commute-cost" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="定期代金を入力してください"
                                 min="0"
+                                step = "1"
+                                required
                             >
                         </div>
                     </div>
@@ -121,9 +124,9 @@ use App\Models\Tools;
                                 name="hourly-wage" 
                                 id="hourly-wage" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="時給を入力してください(円)"
                                 step="1"
                                 min="0"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -133,10 +136,10 @@ use App\Models\Tools;
                                 name="hours-per-day" 
                                 id="hours-per-day" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="1日に働く時間"
                                 step="0.5"
                                 max="24"
                                 min="0"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -146,10 +149,10 @@ use App\Models\Tools;
                                 name="days-per-week" 
                                 id="days-per-week" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="1週間に働く日数"
                                 step="1"
                                 max="7"
                                 min="1"
+                                required
                             >
                         </div>
                         <div class="mt-4">
@@ -159,9 +162,9 @@ use App\Models\Tools;
                                 name="transport-cost" 
                                 id="transport-cost" 
                                 class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="1日あたりの交通費"
                                 step="1"
                                 min="0"
+                                required
                             >
                         </div>
                     </div>
