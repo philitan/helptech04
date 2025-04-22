@@ -20,7 +20,7 @@ use App\Models\Insurance;
                     // 入力されたデータの取得
                     if ($_POST["employment-type"] === "fulltime") {
                         // フルタイム
-                        $monthly = $_POST["monthly-salary"]; // 月給(万円を円に直す)
+                        $monthly = $_POST["monthly-salary"] ; // 月給
                         $traffic = $_POST["commute-cost"]; // 交通費
                     } else {
                         // パートタイム
@@ -54,20 +54,6 @@ use App\Models\Insurance;
                         if ($base < $next) {
                             break;
                         }
-                    }
-
-                    // 社会保険料の計算の準備
-                    $base = $monthly + $traffic; // 基準となる金額の算出
-                    $insurances = Insurance::select('salary')->get(); // 標準報酬のカラムのみ取得
-
-                    // 月給と標準報酬を比較して最適な等級(=ID)を見つけ出す
-                    $id = 0;
-                    $next = 0;
-                    foreach ($insurances as $salary) {
-                        $next = $salary->salary;
-                        if ($base < $next) {
-                            break;
-                        }
                         $id++;
                     }
 
@@ -87,8 +73,8 @@ use App\Models\Insurance;
                             $health += 1;
                         }
                         $health = (int)$health;
-                        $welfare = $insurances2->welfare;
 
+                        $welfare = $insurances2->welfare;
                         $fraction = $welfare - (int)$welfare;
                         if ($fraction > 0) {
                             $welfare += 1;
@@ -166,7 +152,7 @@ use App\Models\Insurance;
 
                     <p class="text-xl font-bold">詳細情報</p>
                     <h4 class="text-l font-semibold text-gray-800 dark:text-gray-200" style="margin-top: 1%;">雇用形態: {{ $employmentType === 'fulltime' ? 'フルタイム' : 'パートタイム' }}</h4>
-                    <p>月給：<?= ($monthly / 10000) ?>万円</p>
+                    <p>月給：<?= $monthly ?>円</p>
                     <p>(手取り(大体)：<?= $monthly * 0.75 ?>円～<?= $monthly * 0.85 ?>円)</p>
                     <p>月毎の交通費：<?= $traffic ?>円</p>
                     <br>
@@ -203,7 +189,6 @@ use App\Models\Insurance;
                     <p>(<?= $age >= 40 ? "健康保険+介護保険" : "健康保険" ?>：<?= $health ?>円、厚生年金：<?= $welfare ?>円)</p>
                     <p>雇用保険料(会社側負担)：<?= $employment ?>円</p>
                 </div>
-
             </div>
         </div>
     </div>
